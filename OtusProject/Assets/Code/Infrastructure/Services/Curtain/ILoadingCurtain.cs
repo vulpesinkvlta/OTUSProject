@@ -1,5 +1,8 @@
-﻿public interface ILoadingCurtain
+namespace Code.Infrastructure.Services.Curtain
 {
-    void Hide();
+  public interface ILoadingCurtain
+  {
     void Show();
+    void Hide();
+  }
 }

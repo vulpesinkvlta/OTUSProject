@@ -1,6 +1,9 @@
 using Zenject;
 
-public interface IDIService
+namespace Code.Infrastructure.Services.DI
 {
-DiContainer Container { get; }
+  public interface IDIService
+  {
+    DiContainer Container { get; }
+  }
 }

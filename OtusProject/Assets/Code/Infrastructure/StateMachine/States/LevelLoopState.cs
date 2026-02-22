@@ -1,39 +1,44 @@
 using Code.Infrastructure._Common.Abstractions;
 using Code.Infrastructure.Contexts;
+using Code.Infrastructure.Services.Curtain;
+using Code.Infrastructure.Services.SceneLoad;
 using UnityEngine;
 
-public class LevelLoopState : IState, ITick
+namespace Code.Infrastructure.StateMachine.States
 {
-    private readonly IStateMachine _stateMachine;
+  public class LevelLoopState : IState, ITick
+  {
+    private readonly IGameStateMachine _stateMachine;
     private readonly ISceneLoaderService _sceneLoader;
     private readonly ILoadingCurtain _curtain;
-    private readonly Code.Infrastructure.Contexts.GameContext _gameContext;
+    private readonly GameLayerContext _gameContext;
 
-    public LevelLoopState(IStateMachine stateMachine,
+    public LevelLoopState(IGameStateMachine stateMachine,
       ISceneLoaderService sceneLoader,
       ILoadingCurtain curtain,
-      Code.Infrastructure.Contexts.GameContext gameContext)
+      GameLayerContext gameContext)
     {
-        _stateMachine = stateMachine;
-        _sceneLoader = sceneLoader;
-        _curtain = curtain;
-        _gameContext = gameContext;
+      _stateMachine = stateMachine;
+      _sceneLoader = sceneLoader;
+      _curtain = curtain;
+      _gameContext = gameContext;
     }
 
     public void Enter()
     {
-        Debug.Log("Enter Level Loop State");
-        _gameContext.Initialize();
+      Debug.Log("Enter Level Loop State");
+      _gameContext.Initialize();
     }
 
     public void Exit()
     {
-
+      
     }
 
     public void Tick()
     {
-        // Debug.Log("Tick Level Loop State");
-        _gameContext.Tick();
+      // Debug.Log("Tick Level Loop State");
+      _gameContext.Tick();
     }
+  }
 }

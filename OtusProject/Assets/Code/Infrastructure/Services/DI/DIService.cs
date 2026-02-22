@@ -1,14 +1,16 @@
 ﻿using Zenject;
 
-
-public class DIService : IDIService
+namespace Code.Infrastructure.Services.DI
 {
-private DiContainer _container;
+  public class DIService : IDIService
+  {
+    private DiContainer _container;
 
-public DIService()
-{
-    _container = ProjectContext.Instance.Container;
-}
+    public DIService()
+    {
+      _container = ProjectContext.Instance.Container;
+    }
     
-public DiContainer Container => _container;
+    public DiContainer Container => _container;
+  }
 }

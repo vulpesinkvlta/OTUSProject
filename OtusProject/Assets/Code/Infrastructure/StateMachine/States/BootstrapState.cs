@@ -1,33 +1,37 @@
+﻿using Code.Infrastructure.Services.Curtain;
+using Code.Infrastructure.Services.SceneLoad;
 using UnityEngine;
 
-public class BootstrapState : IState
+namespace Code.Infrastructure.StateMachine.States
 {
-    private readonly IStateMachine _stateMachine;
+  public class BootstrapState : IState
+  {
+    private readonly IGameStateMachine _stateMachine;
     private readonly ISceneLoaderService _sceneLoader;
     private readonly ILoadingCurtain _curtain;
+    private readonly IConfigDataService _config;
 
-    public BootstrapState(IStateMachine stateMachine,
+    public BootstrapState(IGameStateMachine stateMachine,
         ISceneLoaderService sceneLoader,
-        ILoadingCurtain curtain)
+        ILoadingCurtain curtain,
+        IConfigDataService config)
     {
         _stateMachine = stateMachine;
         _sceneLoader = sceneLoader;
         _curtain = curtain;
+        _config = config;
     }
 
     public void Enter()
     {
-        _curtain.Show();
-        Debug.Log("Create 50 Infrastructure Services");
-        Debug.Log("Get to Server for updates");
-        Debug.Log("Warmup Assets");
-        Debug.Log("Game Warmup Complete");
-
-        _stateMachine.Enter<LoadLevelState, string>("BattleScene");
+      _curtain.Show();
+      _config.Load();      
+      _stateMachine.Enter<LoadLevelState, string>("1.Game");
     }
 
     public void Exit()
     {
-
+      
     }
+  }
 }
