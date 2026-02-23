@@ -28,7 +28,7 @@ namespace Code.Gameplay.Features.Scene
       var activeScene = SceneManager.GetActiveScene();
       var list = new List<MonoBehaviour>();
 
-      var all = FindObjectsOfType<MonoBehaviour>();
+      var all = FindObjectsOfType<MonoBehaviour>(true);
 
       foreach (var monoBehaviour in all)
       {

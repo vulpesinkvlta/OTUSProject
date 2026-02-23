@@ -8,15 +8,51 @@
 //------------------------------------------------------------------------------
 public static class GameComponentsLookup {
 
+    public const int AttackCooldown = 0;
+    public const int AttackRange = 1;
+    public const int AttackTimer = 2;
+    public const int Damage = 3;
+    public const int Destructible = 4;
+    public const int EnemyTag = 5;
+    public const int Health = 6;
+    public const int MoveSpeed = 7;
+    public const int Path = 8;
+    public const int Position = 9;
+    public const int Target = 10;
+    public const int ThroneTag = 11;
+    public const int TowerTag = 12;
 
-
-    public const int TotalComponents = 0;
+    public const int TotalComponents = 13;
 
     public static readonly string[] componentNames = {
-
+        "AttackCooldown",
+        "AttackRange",
+        "AttackTimer",
+        "Damage",
+        "Destructible",
+        "EnemyTag",
+        "Health",
+        "MoveSpeed",
+        "Path",
+        "Position",
+        "Target",
+        "ThroneTag",
+        "TowerTag"
     };
 
     public static readonly System.Type[] componentTypes = {
-
+        typeof(AttackCooldownComponent),
+        typeof(AttackRangeComponent),
+        typeof(AttackTimerComponent),
+        typeof(DamageComponent),
+        typeof(DestructibleComponent),
+        typeof(EnemyTagComponent),
+        typeof(HealthComponent),
+        typeof(MoveSpeedComponent),
+        typeof(PathComponent),
+        typeof(PositionComponent),
+        typeof(TargetComponent),
+        typeof(ThroneTagComponent),
+        typeof(TowerTagComponent)
     };
 }

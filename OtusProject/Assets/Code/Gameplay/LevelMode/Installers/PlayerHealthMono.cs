@@ -1,4 +1,3 @@
-﻿
-    public class PlayerHealthMono
-    {
-    }
+﻿public class PlayerHealthMono
+{
+}

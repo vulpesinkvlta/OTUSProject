@@ -6,7 +6,7 @@ namespace Code.Gameplay.LevelMode.Installers
   {
     public override void InstallBindings()
     {
-            Container.BindInterfacesAndSelfTo<UpgradeSystem>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<UpgradeSystem>().AsSingle().NonLazy();
     }
   }
 }

@@ -1,6 +1,7 @@
 using Code.Infrastructure._Common.Abstractions;
 using Code.Infrastructure.Contexts;
 using Code.Infrastructure.Services.Curtain;
+using Code.Infrastructure.Services.SaveLoad;
 using Code.Infrastructure.Services.SceneLoad;
 using UnityEngine;
 
@@ -12,16 +13,19 @@ namespace Code.Infrastructure.StateMachine.States
     private readonly ISceneLoaderService _sceneLoader;
     private readonly ILoadingCurtain _curtain;
     private readonly GameLayerContext _gameContext;
+    private readonly ISaveLoadService _saveLoad;
 
     public LevelLoopState(IGameStateMachine stateMachine,
       ISceneLoaderService sceneLoader,
       ILoadingCurtain curtain,
-      GameLayerContext gameContext)
+      GameLayerContext gameContext,
+      ISaveLoadService saveLoad)
     {
       _stateMachine = stateMachine;
       _sceneLoader = sceneLoader;
       _curtain = curtain;
       _gameContext = gameContext;
+      _saveLoad = saveLoad;
     }
 
     public void Enter()
@@ -32,12 +36,14 @@ namespace Code.Infrastructure.StateMachine.States
 
     public void Exit()
     {
-      
+      _saveLoad.Save();
+      _saveLoad.Cleanup();
+      _gameContext.Cleanup();
+      Debug.Log("LoadLevelState Exit"); 
     }
 
     public void Tick()
     {
-      // Debug.Log("Tick Level Loop State");
       _gameContext.Tick();
     }
   }

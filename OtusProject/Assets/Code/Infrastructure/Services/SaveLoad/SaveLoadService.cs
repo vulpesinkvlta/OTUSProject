@@ -10,7 +10,7 @@ namespace Code.Infrastructure.Services.SaveLoad
   {
     private readonly IProgressService _progress;
     private const string ProgressKey = "Progress";
-    private List<ISaveLoad> saveLoades = new List<ISaveLoad>();
+    private List<ISaveLoad> _saveLoades = new List<ISaveLoad>();
 
     public SaveLoadService(IProgressService progress)
     {
@@ -21,7 +21,7 @@ namespace Code.Infrastructure.Services.SaveLoad
     public void Save()
     {
       Debug.Log("Save");
-      foreach (ISaveLoad saveLoad in saveLoades)
+      foreach (ISaveLoad saveLoad in _saveLoades)
         saveLoad.Save(_progress.PlayerProgress);
 
       //2ой этап сохранения
@@ -29,7 +29,13 @@ namespace Code.Infrastructure.Services.SaveLoad
 
       //Сохранение в файл.
     }
-    
+
+    public void Load()
+    {
+        foreach (var saveLoad in _saveLoades)
+            saveLoad.Load(_progress.PlayerProgress);
+    }
+
     public PlayerProgress NewProgress()
     {
       _progress.PlayerProgress = new PlayerProgress();
@@ -39,8 +45,8 @@ namespace Code.Infrastructure.Services.SaveLoad
     public void LoadProgressOrInitNew()
     {
       _progress.PlayerProgress =
-        LoadProgress()
-        ?? NewProgress();
+      LoadProgress()
+      ?? NewProgress();
     }
 
     private PlayerProgress LoadProgress() =>
@@ -49,11 +55,11 @@ namespace Code.Infrastructure.Services.SaveLoad
 
     public void AddSaveLoad(ISaveLoad saveLoad)
     {
-      saveLoades.Add(saveLoad);
+      _saveLoades.Add(saveLoad);
       Debug.Log(saveLoad);
     }
 
     public void Cleanup() =>
-      saveLoades.Clear();
+      _saveLoades.Clear();
   }
 }

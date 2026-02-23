@@ -17,7 +17,8 @@ namespace Code.Gameplay.Features.Scene.SaveLoad
 
     public void Initialize()
     {
-      _saveLoad.AddSaveLoad(_playerFacade.PlayerHealthMono as ISaveLoad);;
+      _saveLoad.AddSaveLoad(_playerFacade.PlayerHealthMono as ISaveLoad);
+        
     }
   }
 }
