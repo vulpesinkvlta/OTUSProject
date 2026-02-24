@@ -15,14 +15,16 @@ public static class GameComponentsLookup {
     public const int Destructible = 4;
     public const int EnemyTag = 5;
     public const int Health = 6;
-    public const int MoveSpeed = 7;
-    public const int Path = 8;
-    public const int Position = 9;
-    public const int Target = 10;
-    public const int ThroneTag = 11;
-    public const int TowerTag = 12;
+    public const int MoveDirection = 7;
+    public const int MoveSpeed = 8;
+    public const int Path = 9;
+    public const int Position = 10;
+    public const int Target = 11;
+    public const int ThroneTag = 12;
+    public const int TowerTag = 13;
+    public const int View = 14;
 
-    public const int TotalComponents = 13;
+    public const int TotalComponents = 15;
 
     public static readonly string[] componentNames = {
         "AttackCooldown",
@@ -32,12 +34,14 @@ public static class GameComponentsLookup {
         "Destructible",
         "EnemyTag",
         "Health",
+        "MoveDirection",
         "MoveSpeed",
         "Path",
         "Position",
         "Target",
         "ThroneTag",
-        "TowerTag"
+        "TowerTag",
+        "View"
     };
 
     public static readonly System.Type[] componentTypes = {
@@ -48,11 +52,13 @@ public static class GameComponentsLookup {
         typeof(DestructibleComponent),
         typeof(EnemyTagComponent),
         typeof(HealthComponent),
+        typeof(MoveDirectionComponent),
         typeof(MoveSpeedComponent),
         typeof(PathComponent),
         typeof(PositionComponent),
         typeof(TargetComponent),
         typeof(ThroneTagComponent),
-        typeof(TowerTagComponent)
+        typeof(TowerTagComponent),
+        typeof(ViewComponent)
     };
 }

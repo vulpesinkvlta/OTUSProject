@@ -1,23 +1,43 @@
 ﻿using Entitas;
 using UnityEngine;
+using Zenject;
 
 public class TowerSpawnSystem : IInitializeSystem
 {
-    private readonly GameContext _contexts;
+    private readonly GameContext _context;
+    private readonly DiContainer _container;
+    private readonly TowerView _towerPrefab;
 
-    public TowerSpawnSystem(Contexts contexts)
+    public TowerSpawnSystem(
+        Contexts contexts,
+        DiContainer container,
+        TowerView towerPrefab)
     {
-        _contexts = contexts.game;
+        _context = contexts.game;
+        _container = container;
+        _towerPrefab = towerPrefab;
     }
+
     public void Initialize()
     {
-        var e = _contexts.CreateEntity();
-        e.isTowerTag = true;
-        e.AddHealth(100);
-        e.AddPosition(new Vector3(0,0,0));
-        e.AddDamage(1);
-        e.AddAttackCooldown(1);
-        e.isDestructible = true;
+        Vector3 position = new Vector3(0, 0, 0);
+
+        var entity = _context.CreateEntity();
+        entity.isTowerTag = true;
+        entity.AddHealth(100);
+        entity.AddPosition(position);
+        entity.AddDamage(1);
+        entity.AddAttackCooldown(1);
+        entity.isDestructible = true;
+
+        var view = _container.InstantiatePrefabForComponent<TowerView>(
+            _towerPrefab,
+            position,
+            Quaternion.identity,
+            null);
+
+        view.Initialize(entity);
+        entity.AddView(view);
     }
 }
 
