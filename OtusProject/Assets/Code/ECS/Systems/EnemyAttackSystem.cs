@@ -42,6 +42,7 @@ public class EnemyAttackSystem : IExecuteSystem
 
             target.ReplaceHealth(
                 target.health.value - enemy.damage.value);
+            Debug.Log(target.health.value);
 
             enemy.ReplaceAttackTimer(0);
         }

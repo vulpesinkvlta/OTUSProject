@@ -4,6 +4,7 @@ using UnityEngine;
 public class EnemySpawnSystem : IInitializeSystem
 {
     private readonly EnemyFactory _factory;
+    private readonly Vector3 _spawnPositions = new Vector3(25,0,0);
 
     public EnemySpawnSystem(EnemyFactory factory)
     {
@@ -12,6 +13,7 @@ public class EnemySpawnSystem : IInitializeSystem
 
     public void Initialize()
     {
-        _factory.Create(new Vector3(-5, 0, 0));
+        _factory.Create(EnemyType.Range, _spawnPositions);
+        _factory.Create(EnemyType.Melee, _spawnPositions);
     }
 }
