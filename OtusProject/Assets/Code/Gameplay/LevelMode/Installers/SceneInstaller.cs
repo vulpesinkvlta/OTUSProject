@@ -1,4 +1,5 @@
 ﻿using Code.Gameplay.Features.Scene.SaveLoad;
+using Code.Infrastructure.Boot;
 using UnityEngine;
 using Zenject;
 
@@ -12,7 +13,7 @@ namespace Code.Gameplay.LevelMode.Installers
     [SerializeField] private TowerView _towerPrefab;
     public override void InstallBindings()
     {
-      Debug.Log("Scene Installer");
+            Debug.Log("Scene Installer");
       Container.Bind<Contexts>()
             .FromMethod(_ => Contexts.sharedInstance)
             .AsSingle();

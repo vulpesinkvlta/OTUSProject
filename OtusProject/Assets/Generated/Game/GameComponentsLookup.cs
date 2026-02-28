@@ -11,33 +11,41 @@ public static class GameComponentsLookup {
     public const int AttackCooldown = 0;
     public const int AttackRange = 1;
     public const int AttackTimer = 2;
-    public const int Damage = 3;
-    public const int Destructible = 4;
-    public const int EnemyTag = 5;
-    public const int Health = 6;
-    public const int MoveDirection = 7;
-    public const int MoveSpeed = 8;
-    public const int Path = 9;
-    public const int Position = 10;
-    public const int Target = 11;
-    public const int ThroneTag = 12;
-    public const int TowerTag = 13;
-    public const int View = 14;
+    public const int CanShoot = 3;
+    public const int Damage = 4;
+    public const int Destructible = 5;
+    public const int EnemyTag = 6;
+    public const int EnemyWave = 7;
+    public const int Health = 8;
+    public const int MoveDirection = 9;
+    public const int MoveSpeed = 10;
+    public const int Path = 11;
+    public const int Position = 12;
+    public const int Projectile = 13;
+    public const int SpawnPoint = 14;
+    public const int Target = 15;
+    public const int ThroneTag = 16;
+    public const int TowerTag = 17;
+    public const int View = 18;
 
-    public const int TotalComponents = 15;
+    public const int TotalComponents = 19;
 
     public static readonly string[] componentNames = {
         "AttackCooldown",
         "AttackRange",
         "AttackTimer",
+        "CanShoot",
         "Damage",
         "Destructible",
         "EnemyTag",
+        "EnemyWave",
         "Health",
         "MoveDirection",
         "MoveSpeed",
         "Path",
         "Position",
+        "Projectile",
+        "SpawnPoint",
         "Target",
         "ThroneTag",
         "TowerTag",
@@ -48,14 +56,18 @@ public static class GameComponentsLookup {
         typeof(AttackCooldownComponent),
         typeof(AttackRangeComponent),
         typeof(AttackTimerComponent),
+        typeof(CanShootComponent),
         typeof(DamageComponent),
         typeof(DestructibleComponent),
         typeof(EnemyTagComponent),
+        typeof(EnemyWaveComponent),
         typeof(HealthComponent),
         typeof(MoveDirectionComponent),
         typeof(MoveSpeedComponent),
         typeof(PathComponent),
         typeof(PositionComponent),
+        typeof(ProjectileComponent),
+        typeof(SpawnPointComponent),
         typeof(TargetComponent),
         typeof(ThroneTagComponent),
         typeof(TowerTagComponent),

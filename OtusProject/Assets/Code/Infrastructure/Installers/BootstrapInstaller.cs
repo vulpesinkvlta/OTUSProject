@@ -31,7 +31,7 @@ namespace Code.Infrastructure.Installers
       BindGameStateMachine();
     }
 
-    private void BindInfrastructureServices()
+        private void BindInfrastructureServices()
     {
       Container.Bind<IDIService>().To<DIService>().AsSingle();
       Container.Bind<IInputService>().To<StandaloneInput>().AsSingle();

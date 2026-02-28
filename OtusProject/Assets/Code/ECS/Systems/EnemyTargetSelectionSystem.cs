@@ -7,8 +7,10 @@ public class EnemyTargetSelectionSystem : IExecuteSystem
     private readonly IGroup<GameEntity> _towers;
     private readonly IGroup<GameEntity> _throne;
 
-    public EnemyTargetSelectionSystem(GameContext context)
+    private readonly GameContext context;
+    public EnemyTargetSelectionSystem(Contexts contexts)
     {
+        context = contexts.game;
         _enemies = context.GetGroup(GameMatcher.EnemyTag);
         _towers = context.GetGroup(GameMatcher.TowerTag);
         _throne = context.GetGroup(GameMatcher.ThroneTag);
@@ -20,7 +22,7 @@ public class EnemyTargetSelectionSystem : IExecuteSystem
         {
             if (enemy.hasTarget) continue;
 
-            GameEntity closest = null;
+            GameEntity closestTower = null;
             float minDist = float.MaxValue;
 
             foreach (var tower in _towers)
@@ -32,14 +34,39 @@ public class EnemyTargetSelectionSystem : IExecuteSystem
                 if (dist < minDist)
                 {
                     minDist = dist;
-                    closest = tower;
+                    closestTower = tower;
                 }
             }
 
-            if (closest == null)
-                closest = _throne.GetSingleEntity();
+            if (closestTower == null)
+                closestTower = _throne.GetSingleEntity();
 
-            enemy.AddTarget(closest);
+            enemy.AddTarget(closestTower);
+        }
+
+        foreach (var tower in _towers)
+        {
+            if (tower.hasTarget) continue;
+
+            GameEntity closestEnemy = null;
+            float minDist = float.MaxValue;
+
+            foreach (var enemy in _enemies)
+            {
+                float dist = Vector3.Distance(
+                    enemy.position.value,
+                    tower.position.value);
+
+                if (dist < minDist)
+                {
+                    minDist = dist;
+                    closestEnemy = tower;
+                }
+            }
+
+            if (closestEnemy == null)
+                return;
+            tower.AddTarget(closestEnemy);  
         }
     }
 }

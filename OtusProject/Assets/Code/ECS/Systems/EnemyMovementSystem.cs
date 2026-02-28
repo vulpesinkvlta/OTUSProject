@@ -26,15 +26,16 @@ public class EnemyMovementSystem : IExecuteSystem
             if (target == null || !target.hasPosition)
                 continue;
 
-            float distance = Vector3.Distance(enemy.position.value, target.position.value);
+            float distance = Vector3.Distance(
+                enemy.position.value,
+                target.position.value);
 
             if (distance <= enemy.attackRange.value)
                 continue;
 
             Vector3 direction = (target.position.value - enemy.position.value).normalized;
-
-            Vector3 targetPostion = enemy.position.value + direction * enemy.moveSpeed.value * Time.deltaTime;
-            enemy.ReplacePosition(targetPostion);
+            Vector3 newPosition = enemy.position.value + direction * enemy.moveSpeed.value * Time.deltaTime;
+            enemy.ReplacePosition(newPosition);
         }
     }
 }

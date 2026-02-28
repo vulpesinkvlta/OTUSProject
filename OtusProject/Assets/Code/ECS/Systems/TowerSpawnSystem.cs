@@ -7,7 +7,6 @@ public class TowerSpawnSystem : IInitializeSystem
     private readonly GameContext _context;
     private readonly DiContainer _container;
     private readonly TowerView _towerPrefab;
-
     public TowerSpawnSystem(
         Contexts contexts,
         DiContainer container,

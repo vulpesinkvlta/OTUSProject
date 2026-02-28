@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 namespace Code.Infrastructure.Boot
 {
-  //Editor_Mode
   public class GameRunner : MonoBehaviour
   {
     private void Awake()

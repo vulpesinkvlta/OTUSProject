@@ -10,12 +10,13 @@ public class EnemyAttackSystem : IExecuteSystem
         _enemies = contexts.game.GetGroup(
             GameMatcher.AllOf(
                 GameMatcher.EnemyTag,
-                GameMatcher.Target,
-                GameMatcher.Position,
-                GameMatcher.Damage,
-                GameMatcher.AttackRange,
                 GameMatcher.AttackCooldown,
-                GameMatcher.AttackTimer));
+                GameMatcher.AttackTimer,
+                GameMatcher.AttackRange,
+                GameMatcher.Target,
+                GameMatcher.Damage,
+                GameMatcher.Position
+            ));
     }
 
     public void Execute()
@@ -24,7 +25,7 @@ public class EnemyAttackSystem : IExecuteSystem
         {
             var target = enemy.target.value;
 
-            if (!target.hasHealth)
+            if (target == null || !target.hasPosition || !target.hasHealth)
                 continue;
 
             float distance = Vector3.Distance(
@@ -34,17 +35,14 @@ public class EnemyAttackSystem : IExecuteSystem
             if (distance > enemy.attackRange.value)
                 continue;
 
-            enemy.ReplaceAttackTimer(
-                enemy.attackTimer.value + Time.deltaTime);
+            enemy.ReplaceAttackTimer(enemy.attackTimer.value + Time.deltaTime);
 
-            if (enemy.attackTimer.value < enemy.attackCooldown.value)
-                continue;
-
-            target.ReplaceHealth(
-                target.health.value - enemy.damage.value);
-            Debug.Log(target.health.value);
-
-            enemy.ReplaceAttackTimer(0);
+            if (enemy.attackTimer.value >= enemy.attackCooldown.value)
+            {
+                target.ReplaceHealth(target.health.value - enemy.damage.value);
+                Debug.Log("Башня получила урон: " + target.health.value);
+                enemy.ReplaceAttackTimer(0f);
+            }
         }
     }
 }
