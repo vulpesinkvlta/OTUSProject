@@ -10,10 +10,11 @@ public class GameBootstrap : MonoBehaviour
     public void Construct(
         Contexts contexts,
         EnemyFactory factory,
+        ProjectileViewPool pool,
         TowerView towerView,
         DiContainer container)
     {
-        _systems = new Feature("Systems").Add(new GameplayFeatures(contexts, factory, towerView, container));
+        _systems = new Feature("Systems").Add(new GameplayFeatures(contexts, factory, pool, towerView, container));
     }
 
     void Start()

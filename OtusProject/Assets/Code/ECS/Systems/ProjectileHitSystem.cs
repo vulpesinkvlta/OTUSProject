@@ -3,40 +3,34 @@ using UnityEngine;
 
 public class ProjectileHitSystem : IExecuteSystem
 {
-    private readonly IGroup<GameEntity> _targets;
     private readonly IGroup<GameEntity> _projectiles;
 
     public ProjectileHitSystem(Contexts contexts)
     {
-        _targets = contexts.game.GetGroup(GameMatcher.AllOf(
-                    GameMatcher.Health,
-                    GameMatcher.Target,
-                    GameMatcher.Position));
-
         _projectiles = contexts.game.GetGroup(GameMatcher.AllOf(
                     GameMatcher.Projectile,
                     GameMatcher.Position,
-                    GameMatcher.Damage));
+                    GameMatcher.Damage,
+                    GameMatcher.Target));
     }
     public void Execute()
-    {
-        var targets = _targets.GetEntities();
-        var projectiles = _projectiles.GetEntities();
-    
-        foreach(var projectile in projectiles)
+    {  
+        foreach(var projectile in _projectiles)
         {
-            Vector3 projectilePostion = projectile.position.value;
+            var target = projectile.target.value;
 
-            foreach (var target in targets)
-            {
-                float distance = Vector3.Distance(target.position.value, projectilePostion);
+            if (target == null || !target.hasPosition || !target.hasHealth)
+                continue;
+
+            float distance = Vector3.Distance(projectile.position.value, target.position.value);
                 
-                if(distance < 1f)
-                {
-                    target.ReplaceHealth(target.health.value - projectile.damage.value);
-                    break;
-                }
+            if(distance < 0.5f)
+            {
+                target.ReplaceHealth(target.health.value - projectile.damage.value);
+                projectile.Destroy();
+                break;
             }
+            
         }
     }
 }

@@ -17,18 +17,20 @@ public static class GameComponentsLookup {
     public const int EnemyTag = 6;
     public const int EnemyWave = 7;
     public const int Health = 8;
-    public const int MoveDirection = 9;
-    public const int MoveSpeed = 10;
-    public const int Path = 11;
-    public const int Position = 12;
-    public const int Projectile = 13;
-    public const int SpawnPoint = 14;
-    public const int Target = 15;
-    public const int ThroneTag = 16;
-    public const int TowerTag = 17;
-    public const int View = 18;
+    public const int InAttackRange = 9;
+    public const int MoveDirection = 10;
+    public const int MoveSpeed = 11;
+    public const int Path = 12;
+    public const int Position = 13;
+    public const int Projectile = 14;
+    public const int Shooter = 15;
+    public const int SpawnPoint = 16;
+    public const int Target = 17;
+    public const int ThroneTag = 18;
+    public const int TowerTag = 19;
+    public const int View = 20;
 
-    public const int TotalComponents = 19;
+    public const int TotalComponents = 21;
 
     public static readonly string[] componentNames = {
         "AttackCooldown",
@@ -40,11 +42,13 @@ public static class GameComponentsLookup {
         "EnemyTag",
         "EnemyWave",
         "Health",
+        "InAttackRange",
         "MoveDirection",
         "MoveSpeed",
         "Path",
         "Position",
         "Projectile",
+        "Shooter",
         "SpawnPoint",
         "Target",
         "ThroneTag",
@@ -62,11 +66,13 @@ public static class GameComponentsLookup {
         typeof(EnemyTagComponent),
         typeof(EnemyWaveComponent),
         typeof(HealthComponent),
+        typeof(InAttackRangeComponent),
         typeof(MoveDirectionComponent),
         typeof(MoveSpeedComponent),
         typeof(PathComponent),
         typeof(PositionComponent),
         typeof(ProjectileComponent),
+        typeof(ShooterComponent),
         typeof(SpawnPointComponent),
         typeof(TargetComponent),
         typeof(ThroneTagComponent),

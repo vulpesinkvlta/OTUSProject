@@ -26,6 +26,9 @@ public class EnemyFactory
         var enemyConfig = _configs[enemyType];  
         var entity = _context.CreateEntity();
 
+        if(enemyConfig.EnemyType == EnemyType.Range)
+            entity.isCanShoot = true;
+    
         entity.isEnemyTag = true;
         entity.AddPosition(position);
         entity.AddHealth(enemyConfig.Health);
@@ -34,7 +37,6 @@ public class EnemyFactory
         entity.AddAttackRange(enemyConfig.AttackRange);
         entity.AddAttackCooldown(enemyConfig.AttakcCooldown);
         entity.AddAttackTimer(0);
-
 
         var view = _container.InstantiatePrefabForComponent<EnemyView>(
             enemyConfig.Prefab,

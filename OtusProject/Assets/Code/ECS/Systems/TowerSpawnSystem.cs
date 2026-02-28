@@ -25,6 +25,7 @@ public class TowerSpawnSystem : IInitializeSystem
         entity.isTowerTag = true;
         entity.AddHealth(100);
         entity.AddPosition(position);
+        entity.isCanShoot = true;
         entity.AddDamage(1);
         entity.AddAttackCooldown(1);
         entity.isDestructible = true;

@@ -5,68 +5,55 @@ public class EnemyTargetSelectionSystem : IExecuteSystem
 {
     private readonly IGroup<GameEntity> _enemies;
     private readonly IGroup<GameEntity> _towers;
-    private readonly IGroup<GameEntity> _throne;
+    private readonly GameContext _context;
 
-    private readonly GameContext context;
     public EnemyTargetSelectionSystem(Contexts contexts)
     {
-        context = contexts.game;
-        _enemies = context.GetGroup(GameMatcher.EnemyTag);
-        _towers = context.GetGroup(GameMatcher.TowerTag);
-        _throne = context.GetGroup(GameMatcher.ThroneTag);
+        _context = contexts.game;
+
+        _enemies = _context.GetGroup(
+            GameMatcher.AllOf(
+                GameMatcher.EnemyTag,
+                GameMatcher.Position));
+
+        _towers = _context.GetGroup(
+            GameMatcher.AllOf(
+                GameMatcher.TowerTag,
+                GameMatcher.Position));
     }
 
     public void Execute()
     {
+        var throne = _context.GetGroup(GameMatcher.ThroneTag)
+                             .GetSingleEntity();
+
         foreach (var enemy in _enemies)
         {
-            if (enemy.hasTarget) continue;
+            if (enemy.hasTarget &&
+                enemy.target.value != null &&
+                enemy.target.value.hasHealth)
+                continue;
 
-            GameEntity closestTower = null;
+            GameEntity closest = null;
             float minDist = float.MaxValue;
 
             foreach (var tower in _towers)
             {
-                float dist = Vector3.Distance(
-                    enemy.position.value,
+                float dist = Vector3.SqrMagnitude(
+                    enemy.position.value -
                     tower.position.value);
 
                 if (dist < minDist)
                 {
                     minDist = dist;
-                    closestTower = tower;
+                    closest = tower;
                 }
             }
 
-            if (closestTower == null)
-                closestTower = _throne.GetSingleEntity();
+            if (closest == null)
+                closest = throne;
 
-            enemy.AddTarget(closestTower);
-        }
-
-        foreach (var tower in _towers)
-        {
-            if (tower.hasTarget) continue;
-
-            GameEntity closestEnemy = null;
-            float minDist = float.MaxValue;
-
-            foreach (var enemy in _enemies)
-            {
-                float dist = Vector3.Distance(
-                    enemy.position.value,
-                    tower.position.value);
-
-                if (dist < minDist)
-                {
-                    minDist = dist;
-                    closestEnemy = tower;
-                }
-            }
-
-            if (closestEnemy == null)
-                return;
-            tower.AddTarget(closestEnemy);  
+            enemy.ReplaceTarget(closest);
         }
     }
 }

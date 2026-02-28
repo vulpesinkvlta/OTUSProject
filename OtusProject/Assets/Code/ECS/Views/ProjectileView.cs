@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class BulletView : MonoBehaviour
+public class ProjectileView : MonoBehaviour
 {
     public GameEntity Entity { get; private set; }
 
