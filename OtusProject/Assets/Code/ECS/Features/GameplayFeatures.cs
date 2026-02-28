@@ -9,6 +9,7 @@ public class GameplayFeatures : Feature
         TowerView towerView,
         DiContainer container) : base("Gameplay")
     {
+        Add(new ThroneSpawnSystem(contexts));
         Add(new TowerSpawnSystem(contexts, container, towerView));
         Add(new EnemySpawnSystem(enemyFactory));
 
@@ -34,9 +35,9 @@ public class GameplayFeatures : Feature
 
         Add(new HealthCleanupSystem(contexts));
 
-        Add(new ViewSyncSystem(contexts));
-
         Add(new EnemyWaveCompleteSystem(contexts));
+
+        Add(new ViewSyncSystem(contexts));
     }
 }
 

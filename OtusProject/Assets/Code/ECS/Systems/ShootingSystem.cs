@@ -19,9 +19,14 @@ public class ShootingSystem : IExecuteSystem
 
     public void Execute()
     {
-        foreach (var shooter in _shooters)
+        var shooters = _shooters.GetEntities();
+
+        foreach (var shooter in shooters)
         {
             var target = shooter.target.value;
+
+            if (target == null || !target.hasPosition)
+                continue;
 
             Vector3 dir =
                 (target.position.value - shooter.position.value).normalized;

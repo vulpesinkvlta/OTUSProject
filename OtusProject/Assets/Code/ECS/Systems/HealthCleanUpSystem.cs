@@ -14,7 +14,9 @@ public class HealthCleanupSystem : IExecuteSystem
 
     public void Execute()
     {
-        foreach (var e in _entities)
+        var entities = _entities.GetEntities();
+
+        foreach (var e in entities)
         {
             if (e.health.value > 0)
                 continue;

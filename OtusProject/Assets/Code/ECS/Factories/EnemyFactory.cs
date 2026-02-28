@@ -37,6 +37,9 @@ public class EnemyFactory
         entity.AddAttackRange(enemyConfig.AttackRange);
         entity.AddAttackCooldown(enemyConfig.AttakcCooldown);
         entity.AddAttackTimer(0);
+        entity.isDestructible = true;
+
+        entity.AddTarget(entity);
 
         var view = _container.InstantiatePrefabForComponent<EnemyView>(
             enemyConfig.Prefab,

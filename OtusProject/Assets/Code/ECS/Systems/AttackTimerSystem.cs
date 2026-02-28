@@ -30,7 +30,6 @@ public class AttackTimerSystem : IExecuteSystem
             }
 
             entity.isCanShoot = true;
-            entity.ReplaceAttackTimer(entity.attackCooldown.value);
         }
     }
 }

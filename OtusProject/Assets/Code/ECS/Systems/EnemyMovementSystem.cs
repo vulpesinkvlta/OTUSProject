@@ -15,27 +15,30 @@ public class EnemyMovementSystem : IExecuteSystem
                 GameMatcher.Target,
                 GameMatcher.AttackRange
             ));
+        Debug.Log("EnemyMovementSystem created");
     }
 
     public void Execute()
     {
         foreach (var enemy in _enemies)
         {
+            if (!enemy.hasTarget)
+                continue;
+
+            if (enemy.isInAttackRange)
+                continue;
+
             var target = enemy.target.value;
 
-            if (target == null || !target.hasPosition)
+            if (!target.hasPosition)
                 continue;
 
-            float distance = Vector3.Distance(
-                enemy.position.value,
-                target.position.value);
+            Vector3 dir =
+                (target.position.value - enemy.position.value).normalized;
 
-            if (distance <= enemy.attackRange.value)
-                continue;
-
-            Vector3 direction = (target.position.value - enemy.position.value).normalized;
-            Vector3 newPosition = enemy.position.value + direction * enemy.moveSpeed.value * Time.deltaTime;
-            enemy.ReplacePosition(newPosition);
+            enemy.ReplacePosition(
+                enemy.position.value +
+                dir * enemy.moveSpeed.value * Time.deltaTime);
         }
     }
 }

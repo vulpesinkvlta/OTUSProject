@@ -19,11 +19,11 @@ public class TowerSpawnSystem : IInitializeSystem
 
     public void Initialize()
     {
-        Vector3 position = new Vector3(0, 0, 0);
+        Vector3 position = new Vector3(0, 2, 0);
 
         var entity = _context.CreateEntity();
         entity.isTowerTag = true;
-        entity.AddHealth(100);
+        entity.AddHealth(1000);
         entity.AddPosition(position);
         entity.isCanShoot = true;
         entity.AddDamage(1);

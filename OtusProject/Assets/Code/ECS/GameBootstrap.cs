@@ -21,9 +21,6 @@ public class GameBootstrap : MonoBehaviour
     {
         var contexts = Contexts.sharedInstance;
 
-        //_systems = new Feature("Systems")
-        //    .Add(new GameplayFeatures(contexts));
-
         if (_systems == null)
             Debug.LogError("SYSTEMS NULL");
         _systems.Initialize();

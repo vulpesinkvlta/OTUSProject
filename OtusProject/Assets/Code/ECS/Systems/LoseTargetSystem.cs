@@ -20,9 +20,7 @@ public class LoseTargetSystem : IExecuteSystem
         {
             var target = entity.target.value;
 
-            if (target == null ||
-                !target.hasHealth ||
-                !entity.isInAttackRange)
+            if (target == null || !target.hasHealth)
             {
                 entity.RemoveTarget();
             }

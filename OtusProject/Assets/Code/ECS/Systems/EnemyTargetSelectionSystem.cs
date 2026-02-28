@@ -24,8 +24,12 @@ public class EnemyTargetSelectionSystem : IExecuteSystem
 
     public void Execute()
     {
-        var throne = _context.GetGroup(GameMatcher.ThroneTag)
-                             .GetSingleEntity();
+        var throneGroup = _context.GetGroup(GameMatcher.ThroneTag);
+
+        GameEntity throne =
+            throneGroup.count > 0
+                ? throneGroup.GetSingleEntity()
+                : null;
 
         foreach (var enemy in _enemies)
         {
