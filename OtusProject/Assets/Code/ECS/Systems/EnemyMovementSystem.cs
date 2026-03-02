@@ -20,6 +20,16 @@ public class EnemyMovementSystem : IExecuteSystem
 
     public void Execute()
     {
+        Debug.Log("Enemies in movement group: " + _enemies.count);
+        foreach (var e in _enemies)
+        {
+            Debug.Log(
+                $"Enemy components: " +
+                $"Pos:{e.hasPosition} " +
+                $"Speed:{e.hasMoveSpeed} " +
+                $"Target:{e.hasTarget}"
+            );
+        }
         foreach (var enemy in _enemies)
         {
             if (!enemy.hasTarget)

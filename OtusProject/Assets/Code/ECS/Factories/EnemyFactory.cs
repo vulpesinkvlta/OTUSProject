@@ -19,6 +19,7 @@ public class EnemyFactory
         _context = contexts.game;
         _container = container;
         _configs = configs.ToDictionary(conf => conf.EnemyType);
+        Debug.Log(Contexts.sharedInstance.GetHashCode());
     }
 
     public GameEntity Create(EnemyType enemyType, Vector3 position)

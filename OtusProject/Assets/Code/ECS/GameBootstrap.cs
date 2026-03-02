@@ -15,12 +15,11 @@ public class GameBootstrap : MonoBehaviour
         DiContainer container)
     {
         _systems = new Feature("Systems").Add(new GameplayFeatures(contexts, factory, pool, towerView, container));
+        Debug.Log(contexts.GetHashCode());
     }
 
     void Start()
     {
-        var contexts = Contexts.sharedInstance;
-
         if (_systems == null)
             Debug.LogError("SYSTEMS NULL");
         _systems.Initialize();
