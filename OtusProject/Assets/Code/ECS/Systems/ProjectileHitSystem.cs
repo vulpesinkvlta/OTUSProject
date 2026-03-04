@@ -21,19 +21,16 @@ public class ProjectileHitSystem : IExecuteSystem
 
             if (target == null || !target.hasPosition || !target.hasHealth)
                 continue;
-            float hitRadius = 3f;
-            float sqrDist =
-             (projectile.position.value - target.position.value).sqrMagnitude;
 
-            if (sqrDist <= hitRadius * hitRadius)
+            float distance = Vector3.Distance(projectile.position.value, target.position.value);
+                
+            if(distance < 0.5f)
             {
-                target.ReplaceHealth(
-                    target.health.value - projectile.damage.value);
-                Debug.Log($"Получен урон: {target.health.value}");
-
-               // projectile.isDestroyed = true;
+                target.ReplaceHealth(target.health.value - projectile.damage.value);
+                projectile.Destroy();
+                break;
             }
-
+            
         }
     }
 }

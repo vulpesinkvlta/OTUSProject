@@ -14,8 +14,7 @@ public class ShootingSystem : IExecuteSystem
             GameMatcher.AllOf(
                 GameMatcher.CanShoot,
                 GameMatcher.Position,
-                GameMatcher.Target,
-                GameMatcher.InAttackRange));
+                GameMatcher.Target));
     }
 
     public void Execute()
