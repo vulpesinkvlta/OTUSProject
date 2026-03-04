@@ -29,6 +29,8 @@ public class TowerSpawnSystem : IInitializeSystem
         entity.AddDamage(1);
         entity.AddAttackCooldown(1);
         entity.isDestructible = true;
+        entity.AddAttackRange(6f);
+        entity.AddAttackTimer(0f);
 
         var view = _container.InstantiatePrefabForComponent<TowerView>(
             _towerPrefab,
