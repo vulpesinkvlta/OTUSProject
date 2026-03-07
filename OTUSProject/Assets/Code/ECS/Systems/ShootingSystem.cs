@@ -12,9 +12,11 @@ public class ShootingSystem : IExecuteSystem
 
         _shooters = _context.GetGroup(
             GameMatcher.AllOf(
+                GameMatcher.RangedAttacker,
                 GameMatcher.CanShoot,
                 GameMatcher.Position,
-                GameMatcher.Target));
+                GameMatcher.Target,
+                GameMatcher.InAttackRange));
     }
 
     public void Execute()
@@ -41,6 +43,7 @@ public class ShootingSystem : IExecuteSystem
             projectile.AddTarget(target);
 
             shooter.isCanShoot = false;
+            shooter.ReplaceAttackTimer(shooter.attackCooldown.value);
         }
     }
 }

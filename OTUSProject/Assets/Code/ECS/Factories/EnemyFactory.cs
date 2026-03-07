@@ -24,21 +24,38 @@ public class EnemyFactory
 
     public GameEntity Create(EnemyType enemyType, Vector3 position)
     {
-        var enemyConfig = _configs[enemyType];  
+        var enemyConfig = _configs[enemyType];
         var entity = _context.CreateEntity();
 
-        if(enemyConfig.EnemyType == EnemyType.Range)
-            entity.isCanShoot = true;
-    
         entity.isEnemyTag = true;
+
+        if (enemyType == EnemyType.Range)
+        {
+            entity.isRangedAttacker = true;
+        }
+        else
+        {
+            entity.isMeleeAttacker = true;
+        }
+
         entity.AddPosition(position);
         entity.AddHealth(enemyConfig.Health);
         entity.AddDamage(enemyConfig.Damage);
         entity.AddMoveSpeed(enemyConfig.Speed);
+
         entity.AddAttackRange(enemyConfig.AttackRange);
         entity.AddAttackCooldown(enemyConfig.AttakcCooldown);
         entity.AddAttackTimer(0);
+
+        entity.AddWeapon(
+            enemyType == EnemyType.Melee
+                ? WeaponType.Melee
+                : WeaponType.Projectile,
+            8f);
+
+        entity.isCanShoot = true;
         entity.isDestructible = true;
+
         var view = _container.InstantiatePrefabForComponent<EnemyView>(
             enemyConfig.Prefab,
             position,

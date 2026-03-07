@@ -10,17 +10,20 @@ public class AttackTimerSystem : IExecuteSystem
         _attackers = contexts.game.GetGroup(
             GameMatcher.AllOf(
                 GameMatcher.AttackTimer,
-                GameMatcher.AttackCooldown,
-                GameMatcher.InAttackRange,
-                GameMatcher.Target));
+                GameMatcher.AttackCooldown));
     }
 
     public void Execute()
     {
         float delta = Time.deltaTime;
 
-        foreach (var entity in _attackers)
+        var attackers = _attackers.GetEntities();
+
+        foreach (var entity in attackers)
         {
+            if (entity.isCanShoot)
+                continue;
+
             float timer = entity.attackTimer.value - delta;
 
             if (timer > 0f)
@@ -29,6 +32,7 @@ public class AttackTimerSystem : IExecuteSystem
                 continue;
             }
 
+            entity.ReplaceAttackTimer(0f);
             entity.isCanShoot = true;
         }
     }

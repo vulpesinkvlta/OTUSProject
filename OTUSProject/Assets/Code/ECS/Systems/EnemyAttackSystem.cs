@@ -12,13 +12,13 @@ public class EnemyAttackSystem : IExecuteSystem
                 GameMatcher.EnemyTag,
                 GameMatcher.Target,
                 GameMatcher.Damage,
-                GameMatcher.CanShoot,
-                GameMatcher.InAttackRange));
+                GameMatcher.CanShoot));
     }
 
     public void Execute()
     {
-        foreach (var enemy in _enemies)
+        var enemies = _enemies.GetEntities();
+        foreach (var enemy in enemies)
         {
             var target = enemy.target.value;
 

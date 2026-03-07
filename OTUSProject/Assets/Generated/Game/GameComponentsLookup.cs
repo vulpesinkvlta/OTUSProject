@@ -13,24 +13,29 @@ public static class GameComponentsLookup {
     public const int AttackTimer = 2;
     public const int CanShoot = 3;
     public const int Damage = 4;
-    public const int Destructible = 5;
-    public const int EnemyTag = 6;
-    public const int EnemyWave = 7;
-    public const int Health = 8;
-    public const int InAttackRange = 9;
-    public const int MoveDirection = 10;
-    public const int MoveSpeed = 11;
-    public const int Path = 12;
-    public const int Position = 13;
-    public const int Projectile = 14;
-    public const int Shooter = 15;
-    public const int SpawnPoint = 16;
-    public const int Target = 17;
-    public const int ThroneTag = 18;
-    public const int TowerTag = 19;
-    public const int View = 20;
+    public const int DamageEvent = 5;
+    public const int Destroyed = 6;
+    public const int Destructible = 7;
+    public const int EnemyTag = 8;
+    public const int EnemyWave = 9;
+    public const int Health = 10;
+    public const int InAttackRange = 11;
+    public const int MeleeAttacker = 12;
+    public const int MoveDirection = 13;
+    public const int MoveSpeed = 14;
+    public const int Path = 15;
+    public const int Position = 16;
+    public const int Projectile = 17;
+    public const int RangedAttacker = 18;
+    public const int Shooter = 19;
+    public const int SpawnPoint = 20;
+    public const int Target = 21;
+    public const int ThroneTag = 22;
+    public const int TowerTag = 23;
+    public const int View = 24;
+    public const int Weapon = 25;
 
-    public const int TotalComponents = 21;
+    public const int TotalComponents = 26;
 
     public static readonly string[] componentNames = {
         "AttackCooldown",
@@ -38,22 +43,27 @@ public static class GameComponentsLookup {
         "AttackTimer",
         "CanShoot",
         "Damage",
+        "DamageEvent",
+        "Destroyed",
         "Destructible",
         "EnemyTag",
         "EnemyWave",
         "Health",
         "InAttackRange",
+        "MeleeAttacker",
         "MoveDirection",
         "MoveSpeed",
         "Path",
         "Position",
         "Projectile",
+        "RangedAttacker",
         "Shooter",
         "SpawnPoint",
         "Target",
         "ThroneTag",
         "TowerTag",
-        "View"
+        "View",
+        "Weapon"
     };
 
     public static readonly System.Type[] componentTypes = {
@@ -62,21 +72,26 @@ public static class GameComponentsLookup {
         typeof(AttackTimerComponent),
         typeof(CanShootComponent),
         typeof(DamageComponent),
+        typeof(DamageEventComponent),
+        typeof(DestroyedComponent),
         typeof(DestructibleComponent),
         typeof(EnemyTagComponent),
         typeof(EnemyWaveComponent),
         typeof(HealthComponent),
         typeof(InAttackRangeComponent),
+        typeof(MeleeAttackerComponent),
         typeof(MoveDirectionComponent),
         typeof(MoveSpeedComponent),
         typeof(PathComponent),
         typeof(PositionComponent),
         typeof(ProjectileComponent),
+        typeof(RangedAttackerComponent),
         typeof(ShooterComponent),
         typeof(SpawnPointComponent),
         typeof(TargetComponent),
         typeof(ThroneTagComponent),
         typeof(TowerTagComponent),
-        typeof(ViewComponent)
+        typeof(ViewComponent),
+        typeof(WeaponComponent)
     };
 }

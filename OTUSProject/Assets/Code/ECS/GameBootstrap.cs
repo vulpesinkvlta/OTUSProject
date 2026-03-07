@@ -15,7 +15,6 @@ public class GameBootstrap : MonoBehaviour
         DiContainer container)
     {
         _systems = new Feature("Systems").Add(new GameplayFeatures(contexts, factory, pool, towerView, container));
-        Debug.Log(contexts.GetHashCode());
     }
 
     void Start()

@@ -4,6 +4,7 @@ using UnityEngine;
 public class ProjectileHitSystem : IExecuteSystem
 {
     private readonly IGroup<GameEntity> _projectiles;
+    private readonly GameContext _context;
 
     public ProjectileHitSystem(Contexts contexts)
     {
@@ -12,25 +13,34 @@ public class ProjectileHitSystem : IExecuteSystem
                     GameMatcher.Position,
                     GameMatcher.Damage,
                     GameMatcher.Target));
+        _context = contexts.game;
     }
     public void Execute()
-    {  
-        foreach(var projectile in _projectiles)
+    {
+        var projectiles = _projectiles.GetEntities();
+
+        foreach (var projectile in projectiles)
         {
             var target = projectile.target.value;
 
-            if (target == null || !target.hasPosition || !target.hasHealth)
+            if (target == null || !target.hasPosition)
                 continue;
 
-            float distance = Vector3.Distance(projectile.position.value, target.position.value);
-                
-            if(distance < 0.5f)
+            float distance =
+                Vector3.Distance(
+                    projectile.position.value,
+                    target.position.value);
+
+            if (distance < 0.5f)
             {
-                target.ReplaceHealth(target.health.value - projectile.damage.value);
+                var damage = _context.CreateEntity();
+
+                damage.AddDamageEvent(
+                    target,
+                    projectile.damage.value);
+
                 projectile.Destroy();
-                break;
             }
-            
         }
     }
 }
