@@ -1,5 +1,6 @@
 ﻿using Entitas;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class DamageApplySystem : ReactiveSystem<GameEntity>
 {
@@ -27,6 +28,7 @@ public class DamageApplySystem : ReactiveSystem<GameEntity>
             {
                 target.ReplaceHealth(
                     target.health.value - damage.Value);
+                Debug.Log($"Башня получила урон, здоровье: {target.health.value}");
             }
 
             e.Destroy();

@@ -39,7 +39,7 @@ public class ShootingSystem : IExecuteSystem
             projectile.AddPosition(shooter.position.value + dir * 1.2f);
             projectile.AddMoveDirection(dir);
             projectile.AddMoveSpeed(8f);
-            projectile.AddDamage(1);
+            projectile.AddDamage(shooter.damage.value);
             projectile.AddTarget(target);
 
             shooter.isCanShoot = false;

@@ -12,7 +12,8 @@ public class ProjectileHitSystem : IExecuteSystem
                     GameMatcher.Projectile,
                     GameMatcher.Position,
                     GameMatcher.Damage,
-                    GameMatcher.Target));
+                    GameMatcher.Target
+                    ));
         _context = contexts.game;
     }
     public void Execute()
@@ -38,8 +39,7 @@ public class ProjectileHitSystem : IExecuteSystem
                 damage.AddDamageEvent(
                     target,
                     projectile.damage.value);
-
-                projectile.Destroy();
+                projectile.isDestroyed = true;
             }
         }
     }

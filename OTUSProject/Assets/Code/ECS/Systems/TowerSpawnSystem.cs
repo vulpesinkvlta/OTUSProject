@@ -22,12 +22,21 @@ public class TowerSpawnSystem : IInitializeSystem
         Vector3 position = new Vector3(0, 2, 0);
 
         var entity = _context.CreateEntity();
+
         entity.isTowerTag = true;
+        entity.isCanShoot = true;
+
         entity.AddHealth(1000);
         entity.AddPosition(position);
-        entity.isCanShoot = true;
-        entity.AddDamage(1);
+        entity.AddAttackRange(15);
+        entity.AddDamage(100);
         entity.AddAttackCooldown(1);
+        entity.AddAttackTimer(0);
+
+        entity.AddWeapon(
+            WeaponType.Projectile,
+            8f);
+
         entity.isDestructible = true;
 
         var view = _container.InstantiatePrefabForComponent<TowerView>(
