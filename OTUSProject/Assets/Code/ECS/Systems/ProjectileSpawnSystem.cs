@@ -28,6 +28,7 @@ public class ProjectileSpawnSystem : ReactiveSystem<GameEntity>
         
             view.transform.position = entity.position.value;
             view.Initialize(entity);
+            entity.AddLifeTime(3f);
             entity.AddView(view);
         }
     }

@@ -25,20 +25,19 @@ public class GameplayFeatures : Feature
         Add(new AttackTimerSystem(contexts));
 
         Add(new EnemyMovementSystem(contexts));
-        //Add(new MeleeAttackSystem(contexts));
-        //Add(new ShootingSystem(contexts));
 
-        //Add(new EnemyAttackSystem(contexts));
         Add(new AttackSystem(contexts));
 
         Add(new ProjectileSpawnSystem(contexts, pool));
         Add(new ProjectileMovementSystem(contexts));
         Add(new ProjectileHitSystem(contexts));
         Add(new DamageApplySystem(contexts));
+        Add(new ProjectileLifeTimeSystem(contexts));
         Add(new ProjectileCleanupSystem(contexts, pool));
 
 
         Add(new HealthCleanupSystem(contexts));
+        Add(new ViewDestroySystem(contexts));
 
         Add(new EnemyWaveCompleteSystem(contexts));
 

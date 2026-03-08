@@ -20,22 +20,24 @@ public static class GameComponentsLookup {
     public const int EnemyWave = 9;
     public const int Health = 10;
     public const int InAttackRange = 11;
-    public const int MeleeAttacker = 12;
-    public const int MoveDirection = 13;
-    public const int MoveSpeed = 14;
-    public const int Path = 15;
-    public const int Position = 16;
-    public const int Projectile = 17;
-    public const int RangedAttacker = 18;
-    public const int Shooter = 19;
-    public const int SpawnPoint = 20;
-    public const int Target = 21;
-    public const int ThroneTag = 22;
-    public const int TowerTag = 23;
-    public const int View = 24;
-    public const int Weapon = 25;
+    public const int LifeTime = 12;
+    public const int MeleeAttacker = 13;
+    public const int MoveDirection = 14;
+    public const int MoveSpeed = 15;
+    public const int Path = 16;
+    public const int Position = 17;
+    public const int PreviousPosition = 18;
+    public const int Projectile = 19;
+    public const int RangedAttacker = 20;
+    public const int Shooter = 21;
+    public const int SpawnPoint = 22;
+    public const int Target = 23;
+    public const int ThroneTag = 24;
+    public const int TowerTag = 25;
+    public const int View = 26;
+    public const int Weapon = 27;
 
-    public const int TotalComponents = 26;
+    public const int TotalComponents = 28;
 
     public static readonly string[] componentNames = {
         "AttackCooldown",
@@ -50,11 +52,13 @@ public static class GameComponentsLookup {
         "EnemyWave",
         "Health",
         "InAttackRange",
+        "LifeTime",
         "MeleeAttacker",
         "MoveDirection",
         "MoveSpeed",
         "Path",
         "Position",
+        "PreviousPosition",
         "Projectile",
         "RangedAttacker",
         "Shooter",
@@ -79,11 +83,13 @@ public static class GameComponentsLookup {
         typeof(EnemyWaveComponent),
         typeof(HealthComponent),
         typeof(InAttackRangeComponent),
+        typeof(LifeTimeComponent),
         typeof(MeleeAttackerComponent),
         typeof(MoveDirectionComponent),
         typeof(MoveSpeedComponent),
         typeof(PathComponent),
         typeof(PositionComponent),
+        typeof(PreviousPositionComponent),
         typeof(ProjectileComponent),
         typeof(RangedAttackerComponent),
         typeof(ShooterComponent),

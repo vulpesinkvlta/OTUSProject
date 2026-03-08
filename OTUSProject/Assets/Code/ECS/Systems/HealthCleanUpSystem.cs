@@ -20,8 +20,7 @@ public class HealthCleanupSystem : IExecuteSystem
         {
             if (e.health.value > 0)
                 continue;
-
-            e.Destroy();
+            e.isDestroyed = true;
         }
     }
 }
