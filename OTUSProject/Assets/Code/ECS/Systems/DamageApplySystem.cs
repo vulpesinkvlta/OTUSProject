@@ -28,7 +28,13 @@ public class DamageApplySystem : ReactiveSystem<GameEntity>
             {
                 target.ReplaceHealth(
                     target.health.value - damage.Value);
-                Debug.Log($"Башня получила урон, здоровье: {target.health.value}");
+                if(target.isTowerTag)
+                    Debug.Log($"Башня получила урон, здоровье: {target.health.value}");
+                else if (target.isEnemyTag)
+                    Debug.Log($"Враг {target.view.value} получил урон, здоровье: {target.health.value}");
+                else
+                    Debug.Log($"Трон получил урон, здоровье: {target.health.value}");
+
             }
 
             e.Destroy();

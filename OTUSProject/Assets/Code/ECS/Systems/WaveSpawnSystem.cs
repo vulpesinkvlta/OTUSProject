@@ -15,7 +15,8 @@ public class WaveSpawnSystem : IExecuteSystem
         _waves = _context.GetGroup(GameMatcher.EnemyWave);
         _spawnPoint = _context.GetGroup(GameMatcher.AllOf(
                 GameMatcher.SpawnPoint,
-                GameMatcher.Position));
+                GameMatcher.Position,
+                GameMatcher.EnemyTag));
     }
     public void Execute()
     {

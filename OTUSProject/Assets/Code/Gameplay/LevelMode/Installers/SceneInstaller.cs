@@ -11,6 +11,7 @@ namespace Code.Gameplay.LevelMode.Installers
     [SerializeField] private PlayerFacade _playerFacadeMono;
     [SerializeField] private PlayerHealthMono _playerHealth;
     [SerializeField] private TowerView _towerPrefab;
+    [SerializeField] private ThroneView _thronePrefab;
     public override void InstallBindings()
     {
             Debug.Log("Scene Installer");
@@ -19,11 +20,17 @@ namespace Code.Gameplay.LevelMode.Installers
             .AsSingle();
       
       Container.Bind<PlayerFacade>().FromInstance(_playerFacadeMono).AsSingle();
-      //Container.Bind<PlayerHealthMono>().FromInstance(_playerFacadeMono.PlayerHealthMono).AsSingle();
       Container.BindInterfacesAndSelfTo<SaveLoadContributor>().AsSingle();
       Container.BindInterfacesAndSelfTo<SaveLoadSystem>().AsSingle();
       Container.Bind<EnemyFactory>().AsSingle().WithArguments(_enemyConfigs);
+      Container.BindInterfacesAndSelfTo<BuildModeService>().AsSingle();
+      Container.BindInterfacesAndSelfTo<GridService>().AsSingle();
+
+      Container.Bind<TowerFactory>().AsSingle().WithArguments(_towerPrefab);
       Container.BindInstance(_towerPrefab);
+      Container.Bind<ThroneSpawningSystem>().AsSingle().WithArguments(_thronePrefab);
+      Container.BindInstance(_thronePrefab);
+
       Container.Bind<GameplayFeatures>().AsSingle();
     }
   }

@@ -14,10 +14,11 @@ public class EnemySpawnPoint : MonoBehaviour
 
     private void Start()
     {
-        var e = _context.CreateEntity();
+       var e = _context.CreateEntity();
 
        e.isSpawnPoint = true;
        e.AddPosition(transform.position);
+       e.isEnemyTag = true;
     }
 }
 

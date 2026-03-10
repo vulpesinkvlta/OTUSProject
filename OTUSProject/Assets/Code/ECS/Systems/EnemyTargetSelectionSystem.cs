@@ -78,7 +78,7 @@ public class EnemyTargetSelectionSystem : IExecuteSystem
 
     private GameEntity GetThrone()
     {
-        var throneGroup = _context.GetGroup(GameMatcher.ThroneTag);
+        var throneGroup = _context.GetGroup(GameMatcher.AllOf(GameMatcher.ThroneTag).NoneOf(GameMatcher.SpawnPoint));
 
         return throneGroup.count > 0
             ? throneGroup.GetSingleEntity()

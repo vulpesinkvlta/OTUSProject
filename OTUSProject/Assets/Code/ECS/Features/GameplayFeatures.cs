@@ -7,10 +7,16 @@ public class GameplayFeatures : Feature
         EnemyFactory enemyFactory,
         ProjectileViewPool pool,
         TowerView towerView,
-        DiContainer container) : base("Gameplay")
+        ThroneView throneView,
+        DiContainer container,
+        TowerFactory factory,
+        BuildModeService buildMode,
+        GridService grid) : base("Gameplay")
     {
-        Add(new ThroneSpawnSystem(contexts));
-        Add(new TowerSpawnSystem(contexts, container, towerView));
+       // Add(new ThroneSpawnSystem(contexts));
+        Add(new ThroneSpawningSystem(contexts, container, throneView));
+        //Add(new TowerSpawnSystem(contexts, container, towerView));
+        Add(new TowerPlacementSystem(factory, buildMode, grid));
         Add(new EnemySpawnSystem(enemyFactory));
 
         Add(new WaveInitSystem(contexts));

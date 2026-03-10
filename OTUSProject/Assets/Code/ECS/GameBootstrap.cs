@@ -12,9 +12,14 @@ public class GameBootstrap : MonoBehaviour
         EnemyFactory factory,
         ProjectileViewPool pool,
         TowerView towerView,
-        DiContainer container)
+        ThroneView throneView,
+        DiContainer container,
+        TowerFactory towerFactory,
+        BuildModeService buildMode,
+        GridService grid)
     {
-        _systems = new Feature("Systems").Add(new GameplayFeatures(contexts, factory, pool, towerView, container));
+        _systems = new Feature("Systems").Add(new GameplayFeatures(contexts, factory, pool, towerView, throneView, container,
+                        towerFactory, buildMode, grid));
     }
 
     void Start()
