@@ -14,7 +14,6 @@ namespace Code.Gameplay.LevelMode.Installers
     [SerializeField] private ThroneView _thronePrefab;
     public override void InstallBindings()
     {
-            Debug.Log("Scene Installer");
       Container.Bind<Contexts>()
             .FromMethod(_ => Contexts.sharedInstance)
             .AsSingle();
@@ -26,10 +25,8 @@ namespace Code.Gameplay.LevelMode.Installers
       Container.BindInterfacesAndSelfTo<BuildModeService>().AsSingle();
       Container.BindInterfacesAndSelfTo<GridService>().AsSingle();
 
+      Container.Bind<ThroneFactory>().AsSingle().WithArguments(_thronePrefab);
       Container.Bind<TowerFactory>().AsSingle().WithArguments(_towerPrefab);
-      Container.BindInstance(_towerPrefab);
-      Container.Bind<ThroneSpawningSystem>().AsSingle().WithArguments(_thronePrefab);
-      Container.BindInstance(_thronePrefab);
 
       Container.Bind<GameplayFeatures>().AsSingle();
     }
