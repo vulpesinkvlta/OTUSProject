@@ -12,6 +12,7 @@ namespace Code.Gameplay.LevelMode.Installers
     [SerializeField] private PlayerHealthMono _playerHealth;
     [SerializeField] private TowerView _towerPrefab;
     [SerializeField] private ThroneView _thronePrefab;
+    [SerializeField] private ThroneConfig _throneConfig;
     public override void InstallBindings()
     {
       Container.Bind<Contexts>()
@@ -25,7 +26,8 @@ namespace Code.Gameplay.LevelMode.Installers
       Container.BindInterfacesAndSelfTo<BuildModeService>().AsSingle();
       Container.BindInterfacesAndSelfTo<GridService>().AsSingle();
 
-      Container.Bind<ThroneFactory>().AsSingle().WithArguments(_thronePrefab);
+     // Container.Bind<ThroneFactory>().AsSingle().WithArguments(_thronePrefab);
+      Container.Bind<ThroneFactory>().AsSingle().WithArguments(_throneConfig);
       Container.Bind<TowerFactory>().AsSingle().WithArguments(_towerPrefab);
 
       Container.Bind<GameplayFeatures>().AsSingle();
