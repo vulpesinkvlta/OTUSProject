@@ -26,6 +26,8 @@ public class GameplayFeatures : Feature
 
         Add(new AttackTimerSystem(contexts));
 
+        Add(new EnemyDesiredDirectionSystem(contexts));
+        Add(new EnemySeparationSystem(contexts));
         Add(new EnemyMovementSystem(contexts));
 
         Add(new AttackSystem(contexts));

@@ -12,32 +12,25 @@ public class EnemyMovementSystem : IExecuteSystem
                 GameMatcher.EnemyTag,
                 GameMatcher.Position,
                 GameMatcher.MoveSpeed,
-                GameMatcher.Target,
-                GameMatcher.AttackRange
-            ));
+                GameMatcher.Velocity));
     }
 
     public void Execute()
     {
+        float dt = Time.deltaTime;
+
         foreach (var enemy in _enemies)
         {
-            if (!enemy.hasTarget)
+            Vector3 dir = enemy.velocity.value;
+
+            if (dir == Vector3.zero)
                 continue;
 
-            if (enemy.isInAttackRange)
-                continue;
-
-            var target = enemy.target.value;
-
-            if (!target.hasPosition)
-                continue;
-
-            Vector3 dir =
-                (target.position.value - enemy.position.value).normalized;
+            dir.Normalize();
 
             enemy.ReplacePosition(
                 enemy.position.value +
-                dir * enemy.moveSpeed.value * Time.deltaTime);
+                dir * enemy.moveSpeed.value * dt);
         }
     }
 }

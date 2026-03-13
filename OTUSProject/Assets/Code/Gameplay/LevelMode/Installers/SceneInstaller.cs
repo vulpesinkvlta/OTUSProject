@@ -24,6 +24,7 @@ namespace Code.Gameplay.LevelMode.Installers
       Container.BindInterfacesAndSelfTo<SaveLoadSystem>().AsSingle();
       Container.Bind<EnemyFactory>().AsSingle().WithArguments(_enemyConfigs);
       Container.BindInterfacesAndSelfTo<BuildModeService>().AsSingle();
+      Container.BindInterfacesAndSelfTo<FlowFieldService>().AsSingle();        
       Container.BindInterfacesAndSelfTo<GridService>().AsSingle();
 
      // Container.Bind<ThroneFactory>().AsSingle().WithArguments(_thronePrefab);

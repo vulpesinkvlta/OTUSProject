@@ -45,6 +45,8 @@ public class EnemyFactory
         entity.AddAttackRange(enemyConfig.AttackRange);
         entity.AddAttackCooldown(enemyConfig.AttakcCooldown);
         entity.AddAttackTimer(0);
+        entity.AddRadius(1.0f);
+        entity.AddVelocity(Vector3.zero);
 
         entity.AddWeapon(
             enemyType == EnemyType.Melee
