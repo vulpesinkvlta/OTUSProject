@@ -1,5 +1,4 @@
 ﻿using Code.Gameplay.Features.Scene.SaveLoad;
-using Code.Infrastructure.Boot;
 using UnityEngine;
 using Zenject;
 
@@ -11,14 +10,20 @@ namespace Code.Gameplay.LevelMode.Installers
     [SerializeField] private PlayerFacade _playerFacadeMono;
     [SerializeField] private PlayerHealthMono _playerHealth;
     [SerializeField] private TowerView _towerPrefab;
-    [SerializeField] private ThroneView _thronePrefab;
     [SerializeField] private ThroneConfig _throneConfig;
+    [SerializeField] private ExperienceView _experienceView;    
     public override void InstallBindings()
     {
       Container.Bind<Contexts>()
             .FromMethod(_ => Contexts.sharedInstance)
             .AsSingle();
-      
+
+      Container.Bind<ExperienceView>()
+        .FromInstance(_experienceView)
+        .AsSingle();
+      Container.Bind<IExperienceService>().To<ExperienceService>().AsSingle();
+
+      Container.Bind<ExperienceController>().AsSingle();
       Container.Bind<PlayerFacade>().FromInstance(_playerFacadeMono).AsSingle();
       Container.BindInterfacesAndSelfTo<SaveLoadContributor>().AsSingle();
       Container.BindInterfacesAndSelfTo<SaveLoadSystem>().AsSingle();
@@ -26,7 +31,6 @@ namespace Code.Gameplay.LevelMode.Installers
       Container.BindInterfacesAndSelfTo<BuildModeService>().AsSingle();
       Container.BindInterfacesAndSelfTo<GridService>().AsSingle();
 
-     // Container.Bind<ThroneFactory>().AsSingle().WithArguments(_thronePrefab);
       Container.Bind<ThroneFactory>().AsSingle().WithArguments(_throneConfig);
       Container.Bind<TowerFactory>().AsSingle().WithArguments(_towerPrefab);
 

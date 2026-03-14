@@ -1,4 +1,5 @@
-﻿using Zenject;
+﻿using Code.Infrastructure.Services.DI;
+using Zenject;
 
 public class GameplayFeatures : Feature
 {
@@ -9,7 +10,8 @@ public class GameplayFeatures : Feature
         TowerFactory factory,
         BuildModeService buildMode,
         GridService grid,
-        ThroneFactory throneFactory) : base("Gameplay")
+        ThroneFactory throneFactory,
+        IExperienceService xpService) : base("Gameplay")
     {
         Add(new ThroneSpawningSystem(contexts, throneFactory));
         Add(new TowerPlacementSystem(factory, buildMode, grid));
@@ -41,6 +43,7 @@ public class GameplayFeatures : Feature
 
 
         Add(new HealthCleanupSystem(contexts));
+        Add(new EnemyDeathRewardSystem(contexts, xpService));
         Add(new ViewDestroySystem(contexts));
 
         Add(new EnemyWaveCompleteSystem(contexts));
