@@ -11,7 +11,10 @@ public class EnemyWaveCompleteSystem : IExecuteSystem
     {
         _context = contexts.game;
         _waves = _context.GetGroup(GameMatcher.EnemyWave);
-        _enemies = _context.GetGroup(GameMatcher.EnemyTag);
+        _enemies = _context.GetGroup(
+            GameMatcher
+                .AllOf(GameMatcher.EnemyTag)
+                .NoneOf(GameMatcher.SpawnPoint, GameMatcher.Destroyed));
     }
 
     public void Execute()
