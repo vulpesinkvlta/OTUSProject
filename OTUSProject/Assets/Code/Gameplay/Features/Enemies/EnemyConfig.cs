@@ -12,6 +12,7 @@ public class EnemyConfig : ScriptableObject
     public float Speed;
     public float AttackRange;
     public float AttakcCooldown;
+    public int RewardXP;
 }
 
 public enum EnemyType

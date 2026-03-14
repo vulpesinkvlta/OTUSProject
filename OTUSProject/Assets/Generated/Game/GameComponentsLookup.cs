@@ -30,16 +30,17 @@ public static class GameComponentsLookup {
     public const int Projectile = 19;
     public const int Radius = 20;
     public const int RangedAttacker = 21;
-    public const int Shooter = 22;
-    public const int SpawnPoint = 23;
-    public const int Target = 24;
-    public const int ThroneTag = 25;
-    public const int TowerTag = 26;
-    public const int Velocity = 27;
-    public const int View = 28;
-    public const int Weapon = 29;
+    public const int RewardedXP = 22;
+    public const int Shooter = 23;
+    public const int SpawnPoint = 24;
+    public const int Target = 25;
+    public const int ThroneTag = 26;
+    public const int TowerTag = 27;
+    public const int Velocity = 28;
+    public const int View = 29;
+    public const int Weapon = 30;
 
-    public const int TotalComponents = 30;
+    public const int TotalComponents = 31;
 
     public static readonly string[] componentNames = {
         "AttackCooldown",
@@ -64,6 +65,7 @@ public static class GameComponentsLookup {
         "Projectile",
         "Radius",
         "RangedAttacker",
+        "RewardedXP",
         "Shooter",
         "SpawnPoint",
         "Target",
@@ -97,6 +99,7 @@ public static class GameComponentsLookup {
         typeof(ProjectileComponent),
         typeof(RadiusComponent),
         typeof(RangedAttackerComponent),
+        typeof(RewardedXPComponent),
         typeof(ShooterComponent),
         typeof(SpawnPointComponent),
         typeof(TargetComponent),
