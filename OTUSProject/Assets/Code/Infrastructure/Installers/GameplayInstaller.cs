@@ -11,7 +11,6 @@ namespace Code.Infrastructure.Installers
     public override void InstallBindings()
     {
       Container.BindInterfacesAndSelfTo<GoldService>().AsSingle();
-      //Container.Bind<IPlayerService>().To<PlayerService>().AsSingle();
       Container.Bind<ICardUIPresenter>().To<CardContainerPresenter>().AsSingle();
     }
   }

@@ -1,4 +1,5 @@
 using UnityEngine;
+
 [CreateAssetMenu(fileName = "ThroneConfig", menuName = "Game/Throne Config")]
 public class ThroneConfig : ScriptableObject
 {

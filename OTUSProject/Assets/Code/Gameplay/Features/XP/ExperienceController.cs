@@ -5,10 +5,20 @@ using Zenject;
 public class ExperienceController : IDisposable
 
 {
-    private readonly ExperienceView _view;
-    private readonly IExperienceService _experienceService;
+    private ExperienceView _view;
+    private IExperienceService _experienceService;
 
-    public ExperienceController(ExperienceView view, IExperienceService service)
+    //public ExperienceController(ExperienceView view, IExperienceService service)
+    //{
+    //    _view = view;
+    //    _experienceService = service;
+
+    //    _experienceService.OnExperienceChanged += UpdateUI;
+
+    //    UpdateUI(_experienceService.CurrentXP, _experienceService.NextLevel);
+    //}
+    [Inject]
+    public void Construct(ExperienceView view, IExperienceService service)
     {
         _view = view;
         _experienceService = service;

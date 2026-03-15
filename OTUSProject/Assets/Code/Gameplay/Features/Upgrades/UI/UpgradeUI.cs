@@ -7,8 +7,8 @@ public class UpgradeUI : MonoBehaviour
 {
     [SerializeField] private Button _upgButton;
     [SerializeField] private LevelUpWindow _levelUpWindow;
-    public event Action OnUpgradePlayer;
-    public event Action OnUpgradeGold;
+    //public event Action OnUpgradePlayer;
+    //public event Action OnUpgradeGold;
 
     private void Start()
     {
