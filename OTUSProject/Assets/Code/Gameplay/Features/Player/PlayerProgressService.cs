@@ -2,18 +2,33 @@
 
 public class PlayerProgressService : IPlayerProgressService
 {
+    private readonly TowerConfigs _configs;
     private Dictionary<string, TowerStats> _towerStats
         = new Dictionary<string, TowerStats>();
 
+    public PlayerProgressService(TowerConfigs configs)
+    {
+        _configs = configs;
+    }
     public TowerStats GetTowerStats(string towerId)
     {
         if (!_towerStats.TryGetValue(towerId, out var stats))
         {
-            stats = new TowerStats();
+            stats = CreateFromConfig(_configs);
             _towerStats.Add(towerId, stats);
         }
 
         return stats;
+    }
+    private TowerStats CreateFromConfig(TowerConfigs config)
+    {
+        return new TowerStats
+        {
+            Damage = config.Damage,
+            FireRate = config.FireRate,
+            Range = config.Range,
+            Health = config.Health
+        };
     }
 
     public void UpgradeDamage(string towerId, float value)

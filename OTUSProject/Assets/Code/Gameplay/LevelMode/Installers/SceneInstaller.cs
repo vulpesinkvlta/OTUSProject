@@ -24,8 +24,11 @@ namespace Code.Gameplay.LevelMode.Installers
       Container.Bind<IExperienceService>().To<ExperienceService>().AsSingle();
 
       Container.Bind<IPlayerProgressService>().To<PlayerProgressService>().AsSingle();
-
+      Container.Bind<TowerConfigs>()
+        .FromInstance(_towerConfig)
+        .AsSingle();
       Container.Bind<ExperienceController>().AsSingle();
+      Container.Bind<TowerStatsController>().AsSingle();
       Container.Bind<PlayerFacade>().FromInstance(_playerFacadeMono).AsSingle();
       Container.BindInterfacesAndSelfTo<SaveLoadContributor>().AsSingle();
       Container.BindInterfacesAndSelfTo<SaveLoadSystem>().AsSingle();
