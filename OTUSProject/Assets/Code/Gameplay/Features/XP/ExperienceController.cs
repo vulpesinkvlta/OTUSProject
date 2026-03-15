@@ -1,22 +1,11 @@
-﻿
-using System;
+﻿using System;
 using Zenject;
 
 public class ExperienceController : IDisposable
-
 {
     private ExperienceView _view;
     private IExperienceService _experienceService;
 
-    //public ExperienceController(ExperienceView view, IExperienceService service)
-    //{
-    //    _view = view;
-    //    _experienceService = service;
-
-    //    _experienceService.OnExperienceChanged += UpdateUI;
-
-    //    UpdateUI(_experienceService.CurrentXP, _experienceService.NextLevel);
-    //}
     [Inject]
     public void Construct(ExperienceView view, IExperienceService service)
     {
