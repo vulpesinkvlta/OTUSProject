@@ -6,7 +6,6 @@ public class ThroneFactory
 {
     private readonly GameContext _context;
     private readonly DiContainer _container;
-    //  private readonly ThroneView _prefab;
     private readonly ThroneConfig _prefab;
     public ThroneFactory(Contexts contexts, DiContainer container, ThroneConfig prefab)
     {

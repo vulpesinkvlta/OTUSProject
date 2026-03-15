@@ -2,7 +2,7 @@
 using UnityEngine;
 using Zenject;
 
-public class ExperienceView : MonoBehaviour
+public class ExperienceView : MonoBehaviour 
 {
     [SerializeField] private TextMeshProUGUI _lvlText;
     [SerializeField] private TextMeshProUGUI _xpText;

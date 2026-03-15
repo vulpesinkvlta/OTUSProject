@@ -6,17 +6,17 @@ public class UpgradeSystem : IUpgradeSystem, IInitializable
 {
     private readonly IInputService _input;
     private readonly IConfigDataService _config;
-   // private readonly IPlayerService _player;
+    private readonly IPlayerProgressService _player;
     private readonly ICardUIPresenter _presenter;
 
     public UpgradeSystem(IInputService input, 
-            IConfigDataService config, 
-         //   IPlayerService player,
+            IConfigDataService config,
+            IPlayerProgressService player,
             ICardUIPresenter presenter)
     {
         _input = input;
         _config = config;
-       // _player = player;
+        _player = player;
         _presenter = presenter;
     }
 
@@ -31,14 +31,18 @@ public class UpgradeSystem : IUpgradeSystem, IInitializable
         switch (cardKey.Id)
         {
             case CardId.Damage:
+                _player.UpgradeDamage("BaseTower", cardData.Amount);
                 break;
             case CardId.Health:
-              //  _player.GetPlayer().PlayerHealthMono.UpgradeHealth(cardData.Amount);
+                _player.UpgradeHealth("BaseTower", cardData.Amount);
                 break;
             case CardId.Speed:
+                _player.UpgradeFireRate("BaseTower", cardData.Amount); 
+                break;
+            case CardId.Range:
+                _player.UpgradeRange("BaseTower", cardData.Amount);
                 break;
         }
-
         _presenter.Close();
     }
 }

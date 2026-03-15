@@ -42,7 +42,8 @@ public struct CardKey : IEquatable<CardKey>
         None = 0,
         Damage = 1,
         Health = 2,
-        Speed = 3
+        Speed = 3,
+        Range = 4
     }
 }
 

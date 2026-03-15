@@ -6,6 +6,7 @@ public class ExperienceService : IExperienceService
     public int Level { get; private set; } = 1;
 
     public event Action<int, int> OnExperienceChanged;
+    public event Action OnLevelChanged;
     public int NextLevel { get; private set; } = 100;
 
     public void AddXP(int amount)
@@ -15,7 +16,7 @@ public class ExperienceService : IExperienceService
         {
             CurrentXP -= NextLevel;
             Level++;
-
+            OnLevelChanged?.Invoke();
             NextLevel = CalcuteNextLevelXP(Level);
         }
 

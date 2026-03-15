@@ -8,8 +8,7 @@ namespace Code.Gameplay.LevelMode.Installers
   {
     [SerializeField] private EnemyConfig[] _enemyConfigs;
     [SerializeField] private PlayerFacade _playerFacadeMono;
-    [SerializeField] private PlayerHealthMono _playerHealth;
-    [SerializeField] private TowerView _towerPrefab;
+    [SerializeField] private TowerConfigs _towerConfig;
     [SerializeField] private ThroneConfig _throneConfig;
     [SerializeField] private ExperienceView _experienceView;    
     public override void InstallBindings()
@@ -21,7 +20,10 @@ namespace Code.Gameplay.LevelMode.Installers
       Container.Bind<ExperienceView>()
         .FromInstance(_experienceView)
         .AsSingle();
+
       Container.Bind<IExperienceService>().To<ExperienceService>().AsSingle();
+
+      Container.Bind<IPlayerProgressService>().To<PlayerProgressService>().AsSingle();
 
       Container.Bind<ExperienceController>().AsSingle();
       Container.Bind<PlayerFacade>().FromInstance(_playerFacadeMono).AsSingle();
@@ -32,9 +34,10 @@ namespace Code.Gameplay.LevelMode.Installers
       Container.BindInterfacesAndSelfTo<GridService>().AsSingle();
 
       Container.Bind<ThroneFactory>().AsSingle().WithArguments(_throneConfig);
-      Container.Bind<TowerFactory>().AsSingle().WithArguments(_towerPrefab);
+      Container.Bind<TowerFactory>().AsSingle().WithArguments(_towerConfig);
 
       Container.Bind<GameplayFeatures>().AsSingle();
+  
     }
   }
 }

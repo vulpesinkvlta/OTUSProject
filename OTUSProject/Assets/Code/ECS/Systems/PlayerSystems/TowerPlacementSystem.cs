@@ -6,7 +6,7 @@ public class TowerPlacementSystem : IExecuteSystem
     private readonly TowerFactory _factory;
     private readonly BuildModeService _buildMode;
     private readonly GridService _grid;
-
+    
     public TowerPlacementSystem(
         TowerFactory factory,
         BuildModeService buildMode,

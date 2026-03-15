@@ -7,6 +7,7 @@ public interface IExperienceService
     int NextLevel { get; }
 
     event Action<int, int> OnExperienceChanged;
+    event Action OnLevelChanged;
 
     void AddXP(int amount);
 }

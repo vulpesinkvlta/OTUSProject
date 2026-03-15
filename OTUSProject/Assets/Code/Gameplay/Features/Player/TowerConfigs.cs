@@ -1,18 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class TowerConfigs : MonoBehaviour
+[CreateAssetMenu(fileName = "TowerConfigs", menuName = "Game/TowerConfigs")]
+public class TowerConfigs : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public TowerView Prefab;    
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public string Id;
+    public float Damage;
+    public float FireRate;
+    public float Range;
+    public int Health;
 }

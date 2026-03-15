@@ -19,3 +19,4 @@ MonoBehaviour:
   Speed: 3
   AttackRange: 1
   AttakcCooldown: 1.5
+  RewardXP: 10

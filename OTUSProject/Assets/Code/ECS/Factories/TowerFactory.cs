@@ -6,27 +6,30 @@ public class TowerFactory
 {
     private readonly GameContext _context;
     private readonly DiContainer _container;
-    private readonly TowerView _towerPrefab;
+    private readonly TowerConfigs _towerConfig;
+    private readonly IPlayerProgressService _playerProgress;
 
-    public TowerFactory(Contexts contexts, DiContainer container, TowerView prefab)
+    public TowerFactory(Contexts contexts, DiContainer container, 
+                        TowerConfigs towerConfig, IPlayerProgressService playerProgress)
     {
         _context = contexts.game;
         _container = container;
-        _towerPrefab = prefab;
+        _towerConfig = towerConfig;
+        _playerProgress = playerProgress;
     }
 
     public GameEntity CreateTower(WeaponType type, Vector3 position)
     {
         var entity = _context.CreateEntity();
-
+        var stats = _playerProgress.GetTowerStats(_towerConfig.Id);
         entity.isTowerTag = true;
         entity.isCanShoot = true;
 
-        entity.AddHealth(1000);
+        entity.AddHealth(_towerConfig.Health + stats.Health);
         entity.AddPosition(position);
-        entity.AddAttackRange(15);
-        entity.AddDamage(100);
-        entity.AddAttackCooldown(1);
+        entity.AddAttackRange(_towerConfig.Range + stats.Range);
+        entity.AddDamage(_towerConfig.Damage + stats.Damage);
+        entity.AddAttackCooldown(_towerConfig.FireRate * (1 - stats.FireRate));
         entity.AddAttackTimer(0);
 
         entity.AddWeapon(type, 8f);
@@ -34,14 +37,14 @@ public class TowerFactory
         entity.isDestructible = true;
 
         var view = _container.InstantiatePrefabForComponent<TowerView>(
-            _towerPrefab,
+            _towerConfig.Prefab,
             position,
             Quaternion.identity,
             null);
 
         view.Initialize(entity);
         entity.AddView(view);
-
+        Debug.Log(entity.health.value + "Health");
         return entity;
     }
 }
