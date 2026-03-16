@@ -2,6 +2,8 @@
 
 public class PlayerProgressService : IPlayerProgressService
 {
+    private const string BaseTowerId = "BaseTower";
+
     private readonly TowerConfigs _configs;
     private Dictionary<string, TowerStats> _towerStats
         = new Dictionary<string, TowerStats>();
@@ -9,6 +11,7 @@ public class PlayerProgressService : IPlayerProgressService
     public PlayerProgressService(TowerConfigs configs)
     {
         _configs = configs;
+        _towerStats[BaseTowerId] = CreateFromConfig(_configs);
     }
     public TowerStats GetTowerStats(string towerId)
     {

@@ -10,7 +10,8 @@ namespace Code.Gameplay.LevelMode.Installers
     [SerializeField] private PlayerFacade _playerFacadeMono;
     [SerializeField] private TowerConfigs _towerConfig;
     [SerializeField] private ThroneConfig _throneConfig;
-    [SerializeField] private ExperienceView _experienceView;    
+    [SerializeField] private ExperienceView _experienceView;
+    [SerializeField] private TowerButtonView _towerButtonView;    
     public override void InstallBindings()
     {
       Container.Bind<Contexts>()
@@ -27,8 +28,12 @@ namespace Code.Gameplay.LevelMode.Installers
       Container.Bind<TowerConfigs>()
         .FromInstance(_towerConfig)
         .AsSingle();
-      Container.Bind<ExperienceController>().AsSingle();
-      Container.Bind<TowerStatsController>().AsSingle();
+
+      Container.Bind<TowerButtonView>()
+        .FromInstance(_towerButtonView)
+        .AsSingle();
+      Container.BindInterfacesAndSelfTo<ExperienceController>().AsSingle().NonLazy();
+      Container.BindInterfacesAndSelfTo<TowerStatsController>().AsSingle().NonLazy();
       Container.Bind<PlayerFacade>().FromInstance(_playerFacadeMono).AsSingle();
       Container.BindInterfacesAndSelfTo<SaveLoadContributor>().AsSingle();
       Container.BindInterfacesAndSelfTo<SaveLoadSystem>().AsSingle();

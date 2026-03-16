@@ -25,11 +25,12 @@ public class TowerFactory
         entity.isTowerTag = true;
         entity.isCanShoot = true;
 
-        entity.AddHealth(_towerConfig.Health + stats.Health);
+        entity.AddHealth(stats.Health);
         entity.AddPosition(position);
-        entity.AddAttackRange(_towerConfig.Range + stats.Range);
-        entity.AddDamage(_towerConfig.Damage + stats.Damage);
-        entity.AddAttackCooldown(_towerConfig.FireRate * (1 - stats.FireRate));
+        entity.AddAttackRange(stats.Range);
+        entity.AddDamage(stats.Damage);
+        var cooldown = Mathf.Max(0.05f, stats.FireRate);
+        entity.AddAttackCooldown(cooldown);
         entity.AddAttackTimer(0);
 
         entity.AddWeapon(type, 8f);
