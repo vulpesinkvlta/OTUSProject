@@ -13,20 +13,18 @@ namespace Assets.Code.Gameplay.Features.Upgrades.UI
         [SerializeField] private CardContainer _cardContainer;
 
         private ICardUIPresenter _presenter;
-        private IExperienceService _experienceService;
 
         [Inject]
-        public void Construct(ICardUIPresenter presenter, IExperienceService experienceService)
+        public void Construct(ICardUIPresenter presenter)
         {
             _presenter = presenter;
-            _experienceService = experienceService;
+            _presenter.OnShow += ShowLevelUpWindow;
             _presenter.OnClose += CloseWindow;
         }
 
         private void Awake()
         {
             gameObject.SetActive(false);
-            _experienceService.OnLevelChanged += ShowLevelUpWindow;
         }
 
         public void ShowLevelUpWindow()
@@ -43,8 +41,8 @@ namespace Assets.Code.Gameplay.Features.Upgrades.UI
 
         private void OnDestroy()
         {
+            _presenter.OnShow -= ShowLevelUpWindow;
             _presenter.OnClose -= CloseWindow;
-            _experienceService.OnLevelChanged -= ShowLevelUpWindow;
         }
     }
 }

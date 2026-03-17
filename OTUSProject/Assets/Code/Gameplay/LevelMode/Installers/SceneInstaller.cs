@@ -1,4 +1,5 @@
-﻿using Code.Gameplay.Features.Scene.SaveLoad;
+﻿using Assets.Code.Gameplay.Features.Upgrades.UI;
+using Code.Gameplay.Features.Scene.SaveLoad;
 using UnityEngine;
 using Zenject;
 
@@ -22,8 +23,6 @@ namespace Code.Gameplay.LevelMode.Installers
         .FromInstance(_experienceView)
         .AsSingle();
 
-      Container.Bind<IExperienceService>().To<ExperienceService>().AsSingle();
-
       Container.Bind<IPlayerProgressService>().To<PlayerProgressService>().AsSingle();
       Container.Bind<TowerConfigs>()
         .FromInstance(_towerConfig)
@@ -32,6 +31,8 @@ namespace Code.Gameplay.LevelMode.Installers
       Container.Bind<TowerButtonView>()
         .FromInstance(_towerButtonView)
         .AsSingle();
+
+
       Container.BindInterfacesAndSelfTo<ExperienceController>().AsSingle().NonLazy();
       Container.BindInterfacesAndSelfTo<TowerStatsController>().AsSingle().NonLazy();
       Container.Bind<PlayerFacade>().FromInstance(_playerFacadeMono).AsSingle();

@@ -80,6 +80,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _curtainPrefab: {fileID: 8713324141352661597, guid: 9999f750a9cb62f4e95f2b25c7f6aec2,
     type: 3}
+  _levelUpWindow: {fileID: 6756743898906520591, guid: 49f69f923918f5e429f987f306afa529,
+    type: 3}
 --- !u!114 &8801350328636698075
 MonoBehaviour:
   m_ObjectHideFlags: 0

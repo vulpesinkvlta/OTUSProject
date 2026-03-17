@@ -1,4 +1,5 @@
-﻿using Code.Gameplay.Features.Factory;
+﻿using Assets.Code.Gameplay.Features.Upgrades.UI;
+using Code.Gameplay.Features.Factory;
 using Code.Infrastructure.Boot;
 using Code.Infrastructure.Contexts;
 using Code.Infrastructure.Services.Curtain;
@@ -20,15 +21,21 @@ namespace Code.Infrastructure.Installers
   public class BootstrapInstaller : MonoInstaller, ICoroutineRunner
   {
     [SerializeField] private LoadingCurtain _curtainPrefab;
-    
-    public override void InstallBindings()
+    [SerializeField] private LevelUpWindow _levelUpWindow;
+
+        public override void InstallBindings()
     {
       BindInfrastructureServices();
       BindContexts();
       BindSaveLoadService();
       BindGameFactories();
       BindRegisterServices();
-      BindGameStateMachine();
+      Container.Bind<IExperienceService>().To<ExperienceService>().AsSingle();
+
+            Container.Bind<LevelUpWindow>()
+              .FromInstance(_levelUpWindow)
+              .AsSingle();
+            BindGameStateMachine();
     }
 
         private void BindInfrastructureServices()
@@ -71,6 +78,7 @@ namespace Code.Infrastructure.Installers
       Container.BindInterfacesAndSelfTo<BootstrapState>().AsSingle();
       Container.BindInterfacesAndSelfTo<LoadLevelState>().AsSingle();
       Container.BindInterfacesAndSelfTo<LevelLoopState>().AsSingle();
+      Container.BindInterfacesAndSelfTo<LevelUpState>().AsSingle();
     }
   }
 }
