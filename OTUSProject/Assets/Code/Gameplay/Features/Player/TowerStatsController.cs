@@ -31,8 +31,8 @@ public class TowerStatsController : IInitializable, IDisposable
 
         _view.NameText.text = towerId;
 
-        _stats.OnStatsChanged += Refresh;
-
+        if (_stats != null)
+            _stats.OnStatsChanged += Refresh;
         CreateStatViews();
 
         Refresh();
@@ -59,6 +59,8 @@ public class TowerStatsController : IInitializable, IDisposable
 
     private void Refresh()
     {
+        if (_stats == null || _statViews.Count < 4)
+            return;
         int i = 0;
 
         _statViews[i++].Set("Damage", _stats.Damage.ToString());
@@ -69,6 +71,7 @@ public class TowerStatsController : IInitializable, IDisposable
 
     public void Dispose()
     {
-        _stats.OnStatsChanged -= Refresh;
+        if (_stats != null)
+            _stats.OnStatsChanged -= Refresh;
     }
 }
