@@ -23,6 +23,7 @@ public class ThroneFactory
         throneEntity.AddHealth(throneConfig.Health);
         throneEntity.isDestructible = true;
         throneEntity.AddPosition(position);
+        throneEntity.AddHitRadius(throneConfig.HitRange);
 
         var view = _container.InstantiatePrefabForComponent<ThroneView>(
             throneConfig.Prefab,

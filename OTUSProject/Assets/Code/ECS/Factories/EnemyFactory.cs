@@ -46,6 +46,7 @@ public class EnemyFactory
         entity.AddAttackCooldown(enemyConfig.AttakcCooldown);
         entity.AddAttackTimer(0);
         entity.AddRadius(1.0f);
+        entity.AddHitRadius(0.1f);
         entity.AddVelocity(Vector3.zero);
         entity.AddRewardedXP(enemyConfig.RewardXP);
 

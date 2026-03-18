@@ -1,5 +1,6 @@
 ﻿using Entitas;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class EnemyMovementSystem : IExecuteSystem
 {
@@ -21,6 +22,9 @@ public class EnemyMovementSystem : IExecuteSystem
 
         foreach (var enemy in _enemies)
         {
+            if (enemy.isInAttackRange && enemy.weapon.Type == WeaponType.Melee)
+                continue;
+
             Vector3 dir = enemy.velocity.value;
 
             if (dir == Vector3.zero)

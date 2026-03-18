@@ -9,5 +9,6 @@ public class TowerConfigs : ScriptableObject
     public float Damage;
     public float FireRate;
     public float Range;
+    public float HitRange;
     public int Health;
 }

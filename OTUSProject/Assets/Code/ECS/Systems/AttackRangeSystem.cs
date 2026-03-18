@@ -26,12 +26,14 @@ public class AttackRangeSystem : IExecuteSystem
                 continue;
             }
 
-            float sqrDist =
-                (entity.position.value - target.position.value).sqrMagnitude;
+            float distance = (entity.position.value - target.position.value).magnitude;
 
-            float range = entity.attackRange.value;
+            float totalRange =
+                entity.attackRange.value +
+                entity.hitRadius.Value +
+                (target.hasHitRadius ? target.hitRadius.Value : 0f);
 
-            entity.isInAttackRange = sqrDist <= range * range;
+            entity.isInAttackRange = distance <= totalRange;
         }
     }
 }

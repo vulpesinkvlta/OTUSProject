@@ -5,4 +5,5 @@ public class ThroneConfig : ScriptableObject
 {
     public ThroneView Prefab;
     public int Health;
+    public float HitRange;
 }

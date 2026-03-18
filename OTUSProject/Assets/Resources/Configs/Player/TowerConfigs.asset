@@ -17,4 +17,5 @@ MonoBehaviour:
   Damage: 10
   FireRate: 1
   Range: 15
+  HitRange: 0.1
   Health: 100

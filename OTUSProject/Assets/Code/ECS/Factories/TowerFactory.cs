@@ -28,6 +28,7 @@ public class TowerFactory
         entity.AddHealth(stats.Health);
         entity.AddPosition(position);
         entity.AddAttackRange(stats.Range);
+        entity.AddHitRadius(_towerConfig.HitRange);
         entity.AddDamage(stats.Damage);
         var cooldown = Mathf.Max(0.05f, stats.FireRate);
         entity.AddAttackCooldown(cooldown);

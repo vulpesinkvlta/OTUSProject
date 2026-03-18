@@ -1,6 +1,6 @@
 ﻿using TMPro;
 using UnityEngine;
-
+ 
 public class TowerStatView : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _statNameText;
