@@ -15,10 +15,11 @@ public class GameBootstrap : MonoBehaviour
         BuildModeService buildMode,
         GridService grid,
         ThroneFactory throneFactory,
-        IExperienceService xpService)
+        IExperienceService xpService,
+        ITowerLimitService stats)
     {
         _systems = new Feature("Systems").Add(new GameplayFeatures(contexts, factory, pool,
-                        towerFactory, buildMode, grid, throneFactory, xpService));
+                        towerFactory, buildMode, grid, throneFactory, xpService, stats));
     }
 
     void Start()

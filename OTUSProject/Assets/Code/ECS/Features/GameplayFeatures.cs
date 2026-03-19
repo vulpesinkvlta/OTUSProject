@@ -11,10 +11,11 @@ public class GameplayFeatures : Feature
         BuildModeService buildMode,
         GridService grid,
         ThroneFactory throneFactory,
-        IExperienceService xpService) : base("Gameplay")
+        IExperienceService xpService,
+        ITowerLimitService towerLimitService) : base("Gameplay")
     {
         Add(new ThroneSpawningSystem(contexts, throneFactory));
-        Add(new TowerPlacementSystem(factory, buildMode, grid));
+        Add(new TowerPlacementSystem(factory, buildMode, grid, towerLimitService));
         Add(new EnemySpawnSystem(enemyFactory));
 
         Add(new WaveInitSystem(contexts));

@@ -3,13 +3,15 @@
 //                        (c) 2019 Sergey Stafeyev                           //
 //===========================================================================//
 
+using System;
+using TMPro;
 using UnityEngine;
+using Zenject;
 
 [RequireComponent(typeof(Camera))]
 public class FreeFlyCamera : MonoBehaviour
 {
     #region UI
-
     [Space]
 
     [SerializeField]
@@ -78,6 +80,13 @@ public class FreeFlyCamera : MonoBehaviour
     [Tooltip("This keypress will move the camera to initialization position")]
     private KeyCode _initPositonButton = KeyCode.R;
 
+    [SerializeField] private KeyCode _rotateLeft = KeyCode.LeftArrow;
+    [SerializeField] private KeyCode _rotateRight = KeyCode.RightArrow;
+    [SerializeField] private KeyCode _rotateUp = KeyCode.UpArrow;
+    [SerializeField] private KeyCode _rotateDown = KeyCode.DownArrow;
+
+    [SerializeField] private float _keyboardRotationSpeed = 100f;
+
     #endregion UI
 
     private CursorLockMode _wantedMode;
@@ -91,6 +100,34 @@ public class FreeFlyCamera : MonoBehaviour
     [SerializeField] private float _minY = 1f, _maxY = 10f;
     [SerializeField] private float _maxX = 50f, _minX = -50f;
     [SerializeField] private float _maxZ = 50f, _minZ = -50f;
+    
+
+    private BuildModeService _buildMode;
+
+    [Inject]
+    public void Construct(BuildModeService buildMode)
+    {
+        _buildMode = buildMode;
+        _buildMode.OnBuildModeChanged += MovementState;
+    }
+
+    private void MovementState(bool isBuildMode)
+    {
+        if (isBuildMode)
+        {
+            _enableRotation = false;
+
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else
+        {
+            _enableRotation = true;
+
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+    }
 
 #if UNITY_EDITOR
     private void OnValidate()
@@ -109,27 +146,35 @@ public class FreeFlyCamera : MonoBehaviour
 
     private void OnEnable()
     {
-        if (_active)
-            _wantedMode = CursorLockMode.Locked;
+        //if (_active)
+        //    _wantedMode = CursorLockMode.Locked;
+
+    }
+    private void OnDisable()
+    {
+        _buildMode.OnBuildModeChanged -= MovementState;
     }
 
     // Apply requested cursor state
     private void SetCursorState()
     {
+        if (Cursor.visible)
+            return;
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Cursor.lockState = _wantedMode = CursorLockMode.None;
         }
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            _wantedMode = CursorLockMode.Locked;
-        }
 
-        // Apply cursor state
-        Cursor.lockState = _wantedMode;
-        // Hide cursor when locking
-        Cursor.visible = (CursorLockMode.Locked != _wantedMode);
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    _wantedMode = CursorLockMode.Locked;
+        //}
+
+        //// Apply cursor state
+        //Cursor.lockState = _wantedMode;
+        //// Hide cursor when locking
+        //Cursor.visible = (CursorLockMode.Locked != _wantedMode);
     }
 
     private void CalculateCurrentIncrease(bool moving)
@@ -146,15 +191,41 @@ public class FreeFlyCamera : MonoBehaviour
         _currentIncrease = Time.deltaTime + Mathf.Pow(_currentIncreaseMem, 3) * Time.deltaTime;
     }
 
+    private void HandleKeyboardRotation()
+    {
+        float yaw = 0f;
+        float pitch = 0f;
+
+        if (Input.GetKey(_rotateLeft))
+            yaw -= 1f;
+
+        if (Input.GetKey(_rotateRight))
+            yaw += 1f;
+
+        if (Input.GetKey(_rotateUp))
+            pitch -= 1f;
+
+        if (Input.GetKey(_rotateDown))
+            pitch += 1f;
+
+        Vector3 rotation = new Vector3(pitch, yaw, 0f) * _keyboardRotationSpeed * Time.deltaTime;
+
+        transform.eulerAngles += rotation;
+    }
+
     private void Update()
     {
         if (!_active)
             return;
-
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
         SetCursorState();
 
-        if (Cursor.visible)
-            return;
+        //if (Cursor.visible)
+        //    return;
 
         // Translation
         if (_enableTranslation)
@@ -196,7 +267,7 @@ public class FreeFlyCamera : MonoBehaviour
         }
 
         // Rotation
-        if (_enableRotation)
+        if (_enableRotation && !Cursor.visible)
         {
             // Pitch
             transform.rotation *= Quaternion.AngleAxis(
@@ -218,7 +289,7 @@ public class FreeFlyCamera : MonoBehaviour
             transform.position = _initPosition;
             transform.eulerAngles = _initRotation;
         }
-
+        HandleKeyboardRotation();
         ClampMove();
     }
 

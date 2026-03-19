@@ -32,8 +32,9 @@ namespace Code.Gameplay.LevelMode.Installers
         .FromInstance(_towerButtonView)
         .AsSingle();
 
-
+      Container.Bind<ITowerLimitService>().To<TowerLimitService>().AsSingle();
       Container.BindInterfacesAndSelfTo<ExperienceController>().AsSingle().NonLazy();
+      Container.BindInterfacesAndSelfTo<TowerStats>().AsSingle().NonLazy();
       Container.BindInterfacesAndSelfTo<TowerStatsController>().AsSingle().NonLazy();
       Container.Bind<PlayerFacade>().FromInstance(_playerFacadeMono).AsSingle();
       Container.BindInterfacesAndSelfTo<SaveLoadContributor>().AsSingle();

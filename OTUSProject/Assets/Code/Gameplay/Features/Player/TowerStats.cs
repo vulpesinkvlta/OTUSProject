@@ -10,6 +10,7 @@ public class TowerStats
     public int Health;
 
     public event Action OnStatsChanged;
+
     public void ApplyDamageUpgrade(float value)
     {
         Damage += value;

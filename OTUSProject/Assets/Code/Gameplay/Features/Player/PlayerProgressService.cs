@@ -2,7 +2,7 @@
 
 public class PlayerProgressService : IPlayerProgressService
 {
-    private const string BaseTowerId = "BaseTower";
+    private string BaseTowerId = "BaseTower";
 
     private readonly TowerConfigs _configs;
     private Dictionary<string, TowerStats> _towerStats

@@ -20,10 +20,9 @@ public class ViewDestroySystem : ReactiveSystem<GameEntity>
     {
         foreach (var entity in entities)
         {
-            var view = (MonoBehaviour)entity.view.value;
+            var view = entity.view.value;
 
             Object.Destroy(view.gameObject);
-
             entity.RemoveView();
             entity.Destroy();
         }
