@@ -9,14 +9,11 @@ namespace Code.Infrastructure.Data
     //public EnemyData EnemyData;
     //public InventoryData InventoryData;
     //public ResourcesData ResourcesData;
-    public ExperienceService ExperienceService;
-    public TowerStats TowerStats;
-    public IProgressService ProgressService;
+
         public PlayerProgress()
     {
         //PlayerData = new PlayerData();
-        ExperienceService = new ExperienceService(ProgressService); 
-        TowerStats = new TowerStats(ProgressService);  
+
      }
   }
 }

@@ -9,12 +9,10 @@ public class PlayerProgressService : IPlayerProgressService
     private Dictionary<string, TowerStats> _towerStats
         = new Dictionary<string, TowerStats>();
 
-    IProgressService service;
-    public PlayerProgressService(TowerConfigs configs, IProgressService progressService)
+    public PlayerProgressService(TowerConfigs configs)
     {
         _configs = configs;
         _towerStats[BaseTowerId] = CreateFromConfig(_configs);
-        service = progressService;
     }
     public TowerStats GetTowerStats(string towerId)
     {
@@ -28,7 +26,7 @@ public class PlayerProgressService : IPlayerProgressService
     }
     private TowerStats CreateFromConfig(TowerConfigs config)
     {
-        return new TowerStats(service)
+        return new TowerStats
         {
             Damage = config.Damage,
             FireRate = config.FireRate,

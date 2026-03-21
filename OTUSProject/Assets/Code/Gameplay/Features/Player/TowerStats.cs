@@ -5,7 +5,7 @@ using Code.Infrastructure.Services.SaveLoad;
 using System;
 using UnityEngine;
 
-public class TowerStats : ISaveLoad
+public class TowerStats 
 {
     public float Damage;
     public float FireRate;
@@ -14,11 +14,6 @@ public class TowerStats : ISaveLoad
 
     public event Action OnStatsChanged;
 
-    private readonly IProgressService _progress;
-    public TowerStats(IProgressService progress)
-    {
-        _progress = progress;
-    }
     public void ApplyDamageUpgrade(float value)
     {
         Damage += value;
@@ -40,23 +35,6 @@ public class TowerStats : ISaveLoad
     public void ApplyHealthUpgrade(int value)
     {
         Health += value;
-        OnStatsChanged?.Invoke();
-    }
-
-    public void Save(PlayerProgress progress)
-    {
-        _progress.PlayerProgress.TowerStats.Damage = Damage;
-        _progress.PlayerProgress.TowerStats.FireRate = FireRate;
-        _progress.PlayerProgress.TowerStats.Range = Range;
-        _progress.PlayerProgress.TowerStats.Health = Health;
-    }
-
-    public void Load(PlayerProgress progress)
-    {
-        Damage = _progress.PlayerProgress.TowerStats.Damage;
-        FireRate = _progress.PlayerProgress.TowerStats.FireRate;
-        Range = _progress.PlayerProgress.TowerStats.Range;
-        Health = _progress.PlayerProgress.TowerStats.Health;
         OnStatsChanged?.Invoke();
     }
 }

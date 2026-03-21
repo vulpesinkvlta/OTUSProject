@@ -3,7 +3,7 @@ using Code.Infrastructure.Services.Progress;
 using Code.Infrastructure.Services.SaveLoad;
 using System;
 
-public class ExperienceService : IExperienceService, ISaveLoad
+public class ExperienceService : IExperienceService
 {
     public int CurrentXP { get; private set; }
     public int Level { get; private set; } = 1;
@@ -35,21 +35,6 @@ public class ExperienceService : IExperienceService, ISaveLoad
     private int CalcuteNextLevelXP(int level)
     {
         return 100 + level * 50;
-    }
-
-    public void Save(PlayerProgress progress)
-    {
-        _progress.PlayerProgress.ExperienceService.CurrentXP = CurrentXP;
-        _progress.PlayerProgress.ExperienceService.Level = Level;
-        _progress.PlayerProgress.ExperienceService.NextLevel = NextLevel;
-    }
-
-    public void Load(PlayerProgress progress)
-    {
-        CurrentXP = _progress.PlayerProgress.ExperienceService.CurrentXP;
-        Level = _progress.PlayerProgress.ExperienceService.Level;
-        NextLevel = _progress.PlayerProgress.ExperienceService.NextLevel;
-        OnExperienceChanged?.Invoke(CurrentXP, NextLevel);
     }
 }
 

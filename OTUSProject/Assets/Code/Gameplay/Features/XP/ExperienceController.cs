@@ -43,11 +43,13 @@ public class ExperienceController : IDisposable
 
     private int CalculateLimit(int level)
     {
-        if (level < 5)
+        if (level <= 1)
             return 4;
+        if (level < 5)
+            return 1;
 
         if (level < 10)
-            return 6;
+            return 5;
 
         return 8;
     }
