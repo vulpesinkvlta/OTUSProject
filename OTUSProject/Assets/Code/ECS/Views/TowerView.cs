@@ -1,23 +1,27 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
-public class TowerView : MonoBehaviour
+public class TowerView : MonoBehaviour, IHealthView
 {
     public GameEntity Entity { get; private set; }
-    private ITowerLimitService _limitService;
+
+    [SerializeField] private Slider _hpSilder;
 
     [Inject]
-    public void Construct(ITowerLimitService limitService)
+    public void Construct()
     {
-        _limitService = limitService;
+
     }
     public void Initialize(GameEntity entity)
     {
         Entity = entity;
+        _hpSilder.maxValue = Entity.health.value;
     }
 
-    private void OnDestroy()
+    public void Set(float hp)
     {
-        _limitService.DestroySpawn();
+       _hpSilder.value = hp;
     }
+
 }

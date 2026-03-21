@@ -17,7 +17,7 @@ public class GameplayFeatures : Feature
         Add(new ThroneSpawningSystem(contexts, throneFactory));
         Add(new TowerPlacementSystem(factory, buildMode, grid, towerLimitService));
         Add(new EnemySpawnSystem(enemyFactory));
-
+        Add(new HealthChangedSystem(contexts));
         Add(new WaveInitSystem(contexts));
         Add(new WaveSpawnSystem(contexts, enemyFactory));
 
@@ -48,6 +48,7 @@ public class GameplayFeatures : Feature
         Add(new ViewDestroySystem(contexts));
 
         Add(new EnemyWaveCompleteSystem(contexts));
+        Add(new TowerDestroyedSystem(contexts, towerLimitService));
 
         Add(new ViewSyncSystem(contexts));
     }

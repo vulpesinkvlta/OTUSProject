@@ -25,12 +25,12 @@ namespace Code.Gameplay.Features.Gold.Services
 
     public void Save(PlayerProgress progress)
     {
-      _progress.PlayerProgress.ResourcesData.Gold = _currentGold;
+      //_progress.PlayerProgress.ResourcesData.Gold = _currentGold;
     }
 
     public void Load(PlayerProgress progress)
     {
-      _currentGold = _progress.PlayerProgress.ResourcesData.Gold;
+     // _currentGold = _progress.PlayerProgress.ResourcesData.Gold;
     }
   }
 }

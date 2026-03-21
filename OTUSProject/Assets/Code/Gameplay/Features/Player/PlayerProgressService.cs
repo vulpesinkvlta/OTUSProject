@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Code.Infrastructure.Services.Progress;
+using System.Collections.Generic;
 
 public class PlayerProgressService : IPlayerProgressService
 {
@@ -8,10 +9,12 @@ public class PlayerProgressService : IPlayerProgressService
     private Dictionary<string, TowerStats> _towerStats
         = new Dictionary<string, TowerStats>();
 
-    public PlayerProgressService(TowerConfigs configs)
+    IProgressService service;
+    public PlayerProgressService(TowerConfigs configs, IProgressService progressService)
     {
         _configs = configs;
         _towerStats[BaseTowerId] = CreateFromConfig(_configs);
+        service = progressService;
     }
     public TowerStats GetTowerStats(string towerId)
     {
@@ -25,7 +28,7 @@ public class PlayerProgressService : IPlayerProgressService
     }
     private TowerStats CreateFromConfig(TowerConfigs config)
     {
-        return new TowerStats
+        return new TowerStats(service)
         {
             Damage = config.Damage,
             FireRate = config.FireRate,

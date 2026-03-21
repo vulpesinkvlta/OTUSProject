@@ -19,6 +19,7 @@ namespace Code.Infrastructure.StateMachine.States
             Time.timeScale = 0f;
             _presenter.OnClose += OnUpgradeSelected;
             _presenter.Show();
+            Cursor.lockState = CursorLockMode.None;
         }
 
         public void Exit()

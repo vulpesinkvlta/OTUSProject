@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entitas;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
@@ -12,7 +13,6 @@ public class TowerStatsController : IInitializable, IDisposable
     private TowerStats _stats;
 
     private List<TowerStatView> _statViews = new();
-
     public TowerStatsController(
         TowerButtonView view,
         IPlayerProgressService progress,

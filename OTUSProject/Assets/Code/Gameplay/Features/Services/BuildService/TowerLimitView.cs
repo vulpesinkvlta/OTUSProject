@@ -23,9 +23,5 @@ public class TowerLimitView : MonoBehaviour
         _text.text = $"Towers: {_service.Spawned} / {_service.CurrentLimit}";
     }
 
-    private void OnDestroy()
-    {
-        _service.OnLimitChanged -= UpdateView;
-    }
 }
 

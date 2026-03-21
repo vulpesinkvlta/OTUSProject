@@ -32,10 +32,8 @@ namespace Code.Infrastructure.Installers
       BindRegisterServices();
       Container.Bind<IExperienceService>().To<ExperienceService>().AsSingle();
 
-            Container.Bind<LevelUpWindow>()
-              .FromInstance(_levelUpWindow)
-              .AsSingle();
-            BindGameStateMachine();
+      Container.Bind<LevelUpWindow>().FromInstance(_levelUpWindow).AsSingle();
+        BindGameStateMachine();
     }
 
         private void BindInfrastructureServices()

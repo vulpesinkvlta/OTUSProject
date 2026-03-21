@@ -2041,6 +2041,8 @@ MonoBehaviour:
   _throneConfig: {fileID: 11400000, guid: 1060d967bc8b60841a66b3046499111b, type: 2}
   _experienceView: {fileID: 928785269}
   _towerButtonView: {fileID: 1087410193}
+  _towerView: {fileID: -406248545124506911, guid: 154e2d640a2cd8847a36bb6e37512e1c,
+    type: 3}
 --- !u!114 &1313192884
 MonoBehaviour:
   m_ObjectHideFlags: 0
