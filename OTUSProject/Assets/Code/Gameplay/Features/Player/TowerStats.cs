@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class TowerStats 
 {
+    public string Id;
     public float Damage;
     public float FireRate;
     public float Range;
@@ -36,5 +37,29 @@ public class TowerStats
     {
         Health += value;
         OnStatsChanged?.Invoke();
+    }
+
+    public TowerStatsData ToData(string towerId)
+    {
+        return new TowerStatsData
+        {
+            Id = towerId,
+            Damage = Damage,
+            FireRate = FireRate,
+            Range = Range,
+            Health = Health
+        };
+    }
+
+    public static TowerStats FromData(TowerStatsData data)
+    {
+        return new TowerStats
+        {
+            Id = data.Id,
+            Damage = data.Damage,
+            FireRate = data.FireRate,
+            Range = data.Range,
+            Health = data.Health
+        };
     }
 }

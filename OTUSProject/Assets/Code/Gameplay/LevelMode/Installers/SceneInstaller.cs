@@ -42,6 +42,7 @@ namespace Code.Gameplay.LevelMode.Installers
       Container.BindInterfacesAndSelfTo<TowerStats>().AsSingle().NonLazy();
       Container.BindInterfacesAndSelfTo<TowerStatsController>().AsSingle().NonLazy();
       Container.Bind<PlayerFacade>().FromInstance(_playerFacadeMono).AsSingle();
+      Container.Bind<TowerPlacementSaveLoad>().AsSingle();
       Container.BindInterfacesAndSelfTo<SaveLoadContributor>().AsSingle();
       Container.BindInterfacesAndSelfTo<SaveLoadSystem>().AsSingle();
       Container.Bind<EnemyFactory>().AsSingle().WithArguments(_enemyConfigs);

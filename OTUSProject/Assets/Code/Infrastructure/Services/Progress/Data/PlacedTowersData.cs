@@ -1,9 +1,13 @@
 ﻿using System;
 using UnityEngine;
 
-[Serializable]
-public class PlacedTowerData
+namespace Code.Infrastructure.Data
 {
-    public string TowerId;
-    public Vector3 Position;
+    [Serializable]
+    public class PlacedTowerData
+    {
+        public string TowerId;
+        public WeaponType WeaponType;
+        public Vector3 Position;
+    }
 }

@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Code.Infrastructure.Services.SaveLoad;
+using System;
 
-public interface IExperienceService
+public interface IExperienceService : ISaveLoad
 {
     int CurrentXP { get;}
     int Level { get;}

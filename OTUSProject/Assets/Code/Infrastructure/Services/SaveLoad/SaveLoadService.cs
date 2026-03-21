@@ -26,7 +26,7 @@ namespace Code.Infrastructure.Services.SaveLoad
 
       //2ой этап сохранения
       PlayerPrefs.SetString(ProgressKey,_progress.PlayerProgress.ToJson());
-
+      PlayerPrefs.Save();
       //Сохранение в файл.
     }
 
@@ -55,6 +55,9 @@ namespace Code.Infrastructure.Services.SaveLoad
 
     public void AddSaveLoad(ISaveLoad saveLoad)
     {
+      if (_saveLoades.Contains(saveLoad))
+        return;
+
       _saveLoades.Add(saveLoad);
       Debug.Log(saveLoad);
     }

@@ -1,11 +1,14 @@
 ﻿using System;
 
-[Serializable]
-public class TowerStatsData
+namespace Code.Infrastructure.Data
 {
-    public string Id;
-    public float Damage;
-    public float FireRate;
-    public float Range;
-    public int Health;
+    [Serializable]
+    public class TowerStatsData
+    {
+        public string Id;
+        public float Damage;
+        public float FireRate;
+        public float Range;
+        public int Health;
+    }
 }
