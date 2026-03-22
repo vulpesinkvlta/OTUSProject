@@ -72,24 +72,24 @@ namespace Code.Infrastructure.Services.SaveLoad
 
     public void Cleanup() =>
       _saveLoades.Clear();
-        private void EnsureProgress()
-        {
-            _progress.PlayerProgress = Sanitize(_progress.PlayerProgress) ?? new PlayerProgress();
-        }
+    private void EnsureProgress()
+    {
+        _progress.PlayerProgress = Sanitize(_progress.PlayerProgress) ?? new PlayerProgress();
+    }
 
-        private static PlayerProgress Sanitize(PlayerProgress progress)
-        {
-            if (progress == null)
-                return null;
+    private static PlayerProgress Sanitize(PlayerProgress progress)
+    {
+        if (progress == null)
+            return null;
 
-            progress.PlayerData ??= new PlayerData();
-            progress.EnemyData ??= new EnemyData();
-            progress.InventoryData ??= new InventoryData();
-            progress.ResourcesData ??= new ResourcesData();
-            progress.CommonData ??= new CommonData();
-            progress.PlayerData.Towers ??= new List<TowerStatsData>();
-            progress.PlayerData.PlacedTowers ??= new List<PlacedTowerData>();
-            return progress;
-        }
+        progress.PlayerData ??= new PlayerData();
+        progress.EnemyData ??= new EnemyData();
+        progress.InventoryData ??= new InventoryData();
+        progress.ResourcesData ??= new ResourcesData();
+        progress.CommonData ??= new CommonData();
+        progress.PlayerData.Towers ??= new List<TowerStatsData>();
+        progress.PlayerData.PlacedTowers ??= new List<PlacedTowerData>();
+        return progress;
+    }
     }
 }

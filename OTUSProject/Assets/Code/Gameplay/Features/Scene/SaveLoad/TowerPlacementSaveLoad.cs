@@ -27,7 +27,7 @@ public class TowerPlacementSaveLoad : ISaveLoad
     public void Load(PlayerProgress progress)
     {
         List<PlacedTowerData> placedTowers = progress.PlayerData?.PlacedTowers;
-        if (progress.PlayerData?.PlacedTowers == null)
+        if (placedTowers == null || placedTowers.Count == 0)
             return;
 
         foreach (PlacedTowerData towerData in placedTowers)

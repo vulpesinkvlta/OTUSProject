@@ -65,7 +65,6 @@ public class PlayerProgressService : IPlayerProgressService
     public void Load(PlayerProgress progress)
     {
         EnsurePlayerData(progress);
-        _towerStats.Clear();
         List<TowerStatsData> savedTowers = progress.PlayerData.Towers;
         if (savedTowers == null || savedTowers.Count == 0)
         {

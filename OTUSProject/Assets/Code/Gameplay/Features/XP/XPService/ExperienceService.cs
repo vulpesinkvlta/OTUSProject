@@ -42,7 +42,8 @@ public class ExperienceService : IExperienceService
     {
         EnsurePlayerData(progress);
 
-        PlayerData playerData = progress.PlayerData; Level = Math.Max(1, playerData.Level);
+        PlayerData playerData = progress.PlayerData;
+        Level = Math.Max(1, playerData.Level);
         CurrentXP = Math.Max(0, playerData.CurrentXP);
         NextLevel = CalcuteNextLevelXP(Level);
         OnLevelChanged?.Invoke();
