@@ -63,12 +63,10 @@ public class TowerFactory
 
         foreach (GameEntity tower in towers)
         {
-            placedTowers.Add(new PlacedTowerData
-            {
-                TowerId = _towerConfig.Id,
-                WeaponType = tower.weapon.Type,
-                Position = tower.position.value
-            });
+            placedTowers.Add(PlacedTowerData.FromPosition(
+                _towerConfig.Id,
+                tower.weapon.Type,
+                tower.position.value));
         }
 
         return placedTowers;

@@ -26,7 +26,8 @@ namespace Code.Gameplay.Features.Scene.SaveLoad
     {
         Application.quitting -= OnApplicationQuitting;
         _saveLoad.Save();
-    }
+        _saveLoad.Cleanup();
+        }
 
         private void OnApplicationQuitting()
         {

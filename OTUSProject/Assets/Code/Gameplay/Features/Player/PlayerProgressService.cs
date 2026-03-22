@@ -69,18 +69,22 @@ public class PlayerProgressService : IPlayerProgressService
 
     public void Load(PlayerProgress progress)
     {
-        _towerStats.Clear();
-
         List<TowerStatsData> savedTowers = progress.PlayerData?.Towers;
-        if (savedTowers != null)
+        if (savedTowers == null || savedTowers.Count == 0)
         {
-            foreach (TowerStatsData towerData in savedTowers)
-            {
-                if (towerData == null || string.IsNullOrWhiteSpace(towerData.Id))
-                    continue;
+            EnsureDefaultTower();
+            return;
+        }
 
+        foreach (TowerStatsData towerData in savedTowers)
+        {
+            if (towerData == null || string.IsNullOrWhiteSpace(towerData.Id))
+                continue;
+
+            if (_towerStats.TryGetValue(towerData.Id, out TowerStats existingStats))
+                existingStats.RestoreFromData(towerData);
+            else
                 _towerStats[towerData.Id] = TowerStats.FromData(towerData);
-            }
         }
 
         EnsureDefaultTower();

@@ -27,7 +27,7 @@ public class TowerPlacementSaveLoad : ISaveLoad
 
         foreach (PlacedTowerData towerData in progress.PlayerData.PlacedTowers)
         {
-            _towerFactory.CreateTower(towerData.TowerId, towerData.WeaponType, towerData.Position);
+            _towerFactory.CreateTower(towerData.TowerId, towerData.WeaponType, towerData.ToPosition());
             _towerLimitService.RegisterSpawn();
         }
     }

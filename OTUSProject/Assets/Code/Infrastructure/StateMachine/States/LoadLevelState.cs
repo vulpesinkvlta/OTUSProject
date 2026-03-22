@@ -16,15 +16,16 @@ namespace Code.Infrastructure.StateMachine.States
 
     public LoadLevelState(IGameStateMachine stateMachine,
       ISceneLoaderService sceneLoader,
-      ILoadingCurtain curtain, 
-      GameLayerContext gameContext,
-      ISaveLoadService saveLoad)
+      ILoadingCurtain curtain 
+      //GameLayerContext gameContext,
+      //ISaveLoadService saveLoad
+      )
     {
       _stateMachine = stateMachine;
       _sceneLoader = sceneLoader;
       _curtain = curtain;
-      _gameContext = gameContext;
-      _saveLoad = saveLoad;
+      //_gameContext = gameContext;
+      //_saveLoad = saveLoad;
     }
     
     public void Enter(string sceneName)
@@ -36,7 +37,7 @@ namespace Code.Infrastructure.StateMachine.States
     private void OnLoaded()
     {
       // _gameFactory.CreatePlayer(levelData.playerPosition);
-      _saveLoad.Load();
+    //  _saveLoad.Load();
       _stateMachine.Enter<LevelLoopState>();
       _curtain.Hide();
     }

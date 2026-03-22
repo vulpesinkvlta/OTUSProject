@@ -38,7 +38,15 @@ public class TowerStats
         Health += value;
         OnStatsChanged?.Invoke();
     }
-
+    public void RestoreFromData(TowerStatsData data)
+    {
+        Id = data.Id;
+        Damage = data.Damage;
+        FireRate = data.FireRate;
+        Range = data.Range;
+        Health = data.Health;
+        OnStatsChanged?.Invoke();
+    }
     public TowerStatsData ToData(string towerId)
     {
         return new TowerStatsData

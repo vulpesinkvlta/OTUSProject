@@ -27,6 +27,7 @@ namespace Code.Gameplay.Features.Scene.SaveLoad
             _saveLoad.AddSaveLoad(_playerProgress);
             _saveLoad.AddSaveLoad(_experienceService);
             _saveLoad.AddSaveLoad(_towerPlacementSaveLoad);
+            _saveLoad.Load();
         }
    }
 }
