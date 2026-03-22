@@ -1,5 +1,6 @@
 ﻿using Code.Infrastructure.Data;
 using Code.Infrastructure.Services.SaveLoad;
+using System.Collections.Generic;
 
 public class TowerPlacementSaveLoad : ISaveLoad
 {
@@ -17,16 +18,22 @@ public class TowerPlacementSaveLoad : ISaveLoad
 
     public void Save(PlayerProgress progress)
     {
-        progress.PlayerData.PlacedTowers = new System.Collections.Generic.List<PlacedTowerData>(_towerFactory.CapturePlacedTowers());
+        if (progress.PlayerData == null)
+            progress.PlayerData = new PlayerData();
+
+        progress.PlayerData.PlacedTowers = new List<PlacedTowerData>(_towerFactory.CapturePlacedTowers());
     }
 
     public void Load(PlayerProgress progress)
     {
+        List<PlacedTowerData> placedTowers = progress.PlayerData?.PlacedTowers;
         if (progress.PlayerData?.PlacedTowers == null)
             return;
 
-        foreach (PlacedTowerData towerData in progress.PlayerData.PlacedTowers)
+        foreach (PlacedTowerData towerData in placedTowers)
         {
+            if (towerData == null || string.IsNullOrWhiteSpace(towerData.TowerId))
+                continue;
             _towerFactory.CreateTower(towerData.TowerId, towerData.WeaponType, towerData.ToPosition());
             _towerLimitService.RegisterSpawn();
         }

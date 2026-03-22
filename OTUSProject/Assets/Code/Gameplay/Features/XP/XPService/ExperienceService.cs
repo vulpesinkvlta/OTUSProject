@@ -12,9 +12,6 @@ public class ExperienceService : IExperienceService
     public event Action<int, int> OnExperienceChanged;
     public event Action OnLevelChanged;
 
-    public ExperienceService()
-    {
-    }
     public void AddXP(int amount)
     {
         CurrentXP += amount;
@@ -36,18 +33,25 @@ public class ExperienceService : IExperienceService
 
     public void Save(PlayerProgress progress)
     {
+        EnsurePlayerData(progress);
         progress.PlayerData.Level = Level;
         progress.PlayerData.CurrentXP = CurrentXP;
     }
 
     public void Load(PlayerProgress progress)
     {
-        PlayerData playerData = progress.PlayerData ?? new PlayerData();
-        Level = Math.Max(1, playerData.Level);
+        EnsurePlayerData(progress);
+
+        PlayerData playerData = progress.PlayerData; Level = Math.Max(1, playerData.Level);
         CurrentXP = Math.Max(0, playerData.CurrentXP);
         NextLevel = CalcuteNextLevelXP(Level);
         OnLevelChanged?.Invoke();
         OnExperienceChanged?.Invoke(CurrentXP, NextLevel);
+    }
+    private static void EnsurePlayerData(PlayerProgress progress)
+    {
+        if (progress.PlayerData == null)
+            progress.PlayerData = new PlayerData();
     }
 }
 

@@ -10,7 +10,7 @@ namespace Code.Infrastructure.Services.SaveLoad
   {
     private readonly IProgressService _progress;
     private const string ProgressKey = "Progress";
-    private List<ISaveLoad> _saveLoades = new List<ISaveLoad>();
+    private readonly List<ISaveLoad> _saveLoades = new();
 
     public SaveLoadService(IProgressService progress)
     {
@@ -20,6 +20,7 @@ namespace Code.Infrastructure.Services.SaveLoad
 
     public void Save()
     {
+      EnsureProgress();
       Debug.Log("Save");
       foreach (ISaveLoad saveLoad in _saveLoades)
         saveLoad.Save(_progress.PlayerProgress);
@@ -31,7 +32,8 @@ namespace Code.Infrastructure.Services.SaveLoad
     }
 
     public void Load()
-    {
+    {     
+        EnsureProgress();
         foreach (var saveLoad in _saveLoades)
             saveLoad.Load(_progress.PlayerProgress);
     }
@@ -44,14 +46,20 @@ namespace Code.Infrastructure.Services.SaveLoad
 
     public void LoadProgressOrInitNew()
     {
-      _progress.PlayerProgress =
-      LoadProgress()
-      ?? NewProgress();
+      //_progress.PlayerProgress =
+      //LoadProgress()
+      //?? NewProgress();
+      _progress.PlayerProgress = Sanitize(LoadProgress()) ?? NewProgress();
     }
 
-    private PlayerProgress LoadProgress() =>
-      PlayerPrefs.GetString(ProgressKey)?
-        .ToDeserialized<PlayerProgress>();
+    private PlayerProgress LoadProgress()
+    {
+      string rawProgress = PlayerPrefs.GetString(ProgressKey, string.Empty);
+      if (string.IsNullOrWhiteSpace(rawProgress))
+        return null;
+
+      return rawProgress.ToDeserialized<PlayerProgress>();
+    }
 
     public void AddSaveLoad(ISaveLoad saveLoad)
     {
@@ -64,5 +72,24 @@ namespace Code.Infrastructure.Services.SaveLoad
 
     public void Cleanup() =>
       _saveLoades.Clear();
-  }
+        private void EnsureProgress()
+        {
+            _progress.PlayerProgress = Sanitize(_progress.PlayerProgress) ?? new PlayerProgress();
+        }
+
+        private static PlayerProgress Sanitize(PlayerProgress progress)
+        {
+            if (progress == null)
+                return null;
+
+            progress.PlayerData ??= new PlayerData();
+            progress.EnemyData ??= new EnemyData();
+            progress.InventoryData ??= new InventoryData();
+            progress.ResourcesData ??= new ResourcesData();
+            progress.CommonData ??= new CommonData();
+            progress.PlayerData.Towers ??= new List<TowerStatsData>();
+            progress.PlayerData.PlacedTowers ??= new List<PlacedTowerData>();
+            return progress;
+        }
+    }
 }
