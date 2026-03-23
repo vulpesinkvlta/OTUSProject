@@ -37,17 +37,17 @@ namespace Code.Gameplay.LevelMode.Installers
         .FromInstance(_towerView)
         .AsSingle();
 
-            Container.Bind<ITowerLimitService>().To<TowerLimitService>().AsSingle();
-      Container.BindInterfacesAndSelfTo<ExperienceController>().AsSingle().NonLazy();
-      Container.BindInterfacesAndSelfTo<TowerStats>().AsSingle().NonLazy();
-      Container.BindInterfacesAndSelfTo<TowerStatsController>().AsSingle().NonLazy();
-      Container.Bind<PlayerFacade>().FromInstance(_playerFacadeMono).AsSingle();
-      Container.Bind<TowerPlacementSaveLoad>().AsSingle();
       Container.BindInterfacesAndSelfTo<SaveLoadContributor>().AsSingle();
       Container.BindInterfacesAndSelfTo<SaveLoadSystem>().AsSingle();
       Container.Bind<EnemyFactory>().AsSingle().WithArguments(_enemyConfigs);
       Container.BindInterfacesAndSelfTo<BuildModeService>().AsSingle();
       Container.BindInterfacesAndSelfTo<GridService>().AsSingle();
+      Container.Bind<ITowerLimitService>().To<TowerLimitService>().AsSingle();
+      Container.BindInterfacesAndSelfTo<ExperienceController>().AsSingle().NonLazy();
+      Container.BindInterfacesAndSelfTo<TowerStats>().AsSingle().NonLazy();
+      Container.BindInterfacesAndSelfTo<TowerStatsController>().AsSingle().NonLazy();
+      Container.Bind<PlayerFacade>().FromInstance(_playerFacadeMono).AsSingle();
+      Container.Bind<TowerPlacementSaveLoad>().AsSingle();
 
       Container.Bind<ThroneFactory>().AsSingle().WithArguments(_throneConfig);
       Container.Bind<TowerFactory>().AsSingle().WithArguments(_towerConfig);

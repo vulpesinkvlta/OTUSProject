@@ -37,7 +37,7 @@ namespace Code.Infrastructure.StateMachine.States
     private void OnLoaded()
     {
       // _gameFactory.CreatePlayer(levelData.playerPosition);
-      _saveLoad.Load();
+    //  _saveLoad.Load();
       _stateMachine.Enter<LevelLoopState>();
       _curtain.Hide();
     }
@@ -45,8 +45,8 @@ namespace Code.Infrastructure.StateMachine.States
     public void Exit()
     {
       _saveLoad.Save();
-      _saveLoad.Cleanup();
-      _gameContext.Cleanup();
+      //_saveLoad.Cleanup();
+      //_gameContext.Cleanup();
       //_assetsProvider.Cleanup();
       Debug.Log("LoadLevelState Exit"); 
     }

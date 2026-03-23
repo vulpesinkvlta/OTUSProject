@@ -14,21 +14,30 @@ namespace Code.Infrastructure.Services.SaveLoad
 
     public SaveLoadService(IProgressService progress)
     {
-      _progress = progress;
-      Debug.Log("SaveLoadService Create");
+        _progress = progress;
+        Debug.Log("SaveLoadService Create");
     }
 
     public void Save()
     {
-      EnsureProgress();
-      Debug.Log("Save");
-      foreach (ISaveLoad saveLoad in _saveLoades)
+        EnsureProgress();
+        Debug.Log("Save");
+        foreach (ISaveLoad saveLoad in _saveLoades)
         saveLoad.Save(_progress.PlayerProgress);
 
-      //2ой этап сохранения
-      PlayerPrefs.SetString(ProgressKey,_progress.PlayerProgress.ToJson());
-      PlayerPrefs.Save();
-      //Сохранение в файл.
+        Debug.Log("SAVE DATA: " + _progress.PlayerProgress.ToJson());
+
+        if (_progress.PlayerProgress == null)
+        {
+            Debug.LogError("TRY SAVE NULL PROGRESS");
+            return;
+        }
+
+        //2ой этап сохранения
+        PlayerPrefs.SetString(ProgressKey,_progress.PlayerProgress.ToJson());
+        PlayerPrefs.Save();
+        Debug.Log(_progress.PlayerProgress.ToJson());
+        //Сохранение в файл.
     }
 
     public void Load()
@@ -40,38 +49,49 @@ namespace Code.Infrastructure.Services.SaveLoad
 
     public PlayerProgress NewProgress()
     {
-      _progress.PlayerProgress = new PlayerProgress();
-      return _progress.PlayerProgress;
+        _progress.PlayerProgress = new PlayerProgress();
+        return _progress.PlayerProgress;
     }
 
     public void LoadProgressOrInitNew()
     {
-      //_progress.PlayerProgress =
-      //LoadProgress()
-      //?? NewProgress();
-      _progress.PlayerProgress = Sanitize(LoadProgress()) ?? NewProgress();
+        //_progress.PlayerProgress =
+        //LoadProgress()
+        //?? NewProgress();
+        _progress.PlayerProgress = Sanitize(LoadProgress()) ?? NewProgress();
     }
 
     private PlayerProgress LoadProgress()
     {
-      string rawProgress = PlayerPrefs.GetString(ProgressKey, string.Empty);
-      if (string.IsNullOrWhiteSpace(rawProgress))
+        string rawProgress = PlayerPrefs.GetString(ProgressKey, string.Empty);
+        if (string.IsNullOrWhiteSpace(rawProgress))
         return null;
-
-      return rawProgress.ToDeserialized<PlayerProgress>();
+        Debug.Log("RAW SAVE: " + rawProgress);  
+        return rawProgress.ToDeserialized<PlayerProgress>();
     }
 
     public void AddSaveLoad(ISaveLoad saveLoad)
     {
-      if (_saveLoades.Contains(saveLoad))
+        if (_saveLoades.Contains(saveLoad))
         return;
 
-      _saveLoades.Add(saveLoad);
-      Debug.Log(saveLoad);
+        _saveLoades.Add(saveLoad);
+        Debug.Log(saveLoad);
     }
 
     public void Cleanup() =>
-      _saveLoades.Clear();
+        _saveLoades.Clear();
+
+    public void ClearProgress()
+    {
+        PlayerPrefs.DeleteKey("Progress");
+        PlayerPrefs.Save();
+
+        Debug.Log("SAVE CLEARED");
+
+        _progress.PlayerProgress = new PlayerProgress();
+    }
+
     private void EnsureProgress()
     {
         _progress.PlayerProgress = Sanitize(_progress.PlayerProgress) ?? new PlayerProgress();
@@ -91,5 +111,5 @@ namespace Code.Infrastructure.Services.SaveLoad
         progress.PlayerData.PlacedTowers ??= new List<PlacedTowerData>();
         return progress;
     }
-    }
+  }
 }

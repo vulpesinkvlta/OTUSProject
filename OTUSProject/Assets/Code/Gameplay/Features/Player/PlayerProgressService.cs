@@ -72,13 +72,27 @@ public class PlayerProgressService : IPlayerProgressService
             return;
         }
 
+        HashSet<string> savedTowerIds = new();
+
         foreach (TowerStatsData towerData in savedTowers)
         {
             if (towerData == null || string.IsNullOrWhiteSpace(towerData.Id))
                 continue;
 
-            _towerStats[towerData.Id] = TowerStats.FromData(towerData);
+            savedTowerIds.Add(towerData.Id);
+
+            if (_towerStats.TryGetValue(towerData.Id, out TowerStats existingStats))
+                existingStats.RestoreFromData(towerData);
+            else
+                _towerStats[towerData.Id] = TowerStats.FromData(towerData);
         }
+
+        List<string> staleTowerIds = _towerStats.Keys
+            .Where(id => id != BaseTowerId && !savedTowerIds.Contains(id))
+            .ToList();
+
+        foreach (string staleTowerId in staleTowerIds)
+            _towerStats.Remove(staleTowerId);
 
         EnsureDefaultTower();
     }

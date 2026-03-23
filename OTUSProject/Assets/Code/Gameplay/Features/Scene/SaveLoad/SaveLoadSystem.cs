@@ -7,30 +7,32 @@ namespace Code.Gameplay.Features.Scene.SaveLoad
 {
   public class SaveLoadSystem : IInitializable, IDisposable
   {
-    private readonly ISaveLoadService _saveLoad;
+        private readonly ISaveLoadService _saveLoad;
 
-    public SaveLoadSystem(ISaveLoadService saveLoad)
-    {
-      _saveLoad = saveLoad;
-    }
+        public SaveLoadSystem(ISaveLoadService saveLoad)
+        {
+          _saveLoad = saveLoad;
+        }
     
-    public void Initialize()
-    {
-      //_saveLoad.Save();
-      // _saveLoad.Load();
+        public void Initialize()
+        {
+          //_saveLoad.Save();
+          _saveLoad.LoadProgressOrInitNew();
+          //_saveLoad.Load();
 
-      Application.quitting += OnApplicationQuitting;
-    }
+          Application.quitting += OnApplicationQuitting;
+        }
 
-    public void Dispose()
-    {
-        Application.quitting -= OnApplicationQuitting;
-        _saveLoad.Save();
-        _saveLoad.Cleanup();
+        public void Dispose()
+        {
+            Application.quitting -= OnApplicationQuitting;
+           // _saveLoad.Save();
+            //_saveLoad.Cleanup();
         }
 
         private void OnApplicationQuitting()
         {
+            Debug.Log("APPLICATION QUIT SAVE");
             _saveLoad.Save();
         }
     }

@@ -10,5 +10,6 @@ namespace Code.Infrastructure.Services.SaveLoad
     PlayerProgress NewProgress();
     void LoadProgressOrInitNew();
     void Load();
+        void ClearProgress();
     }
 }
