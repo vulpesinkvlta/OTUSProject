@@ -8,42 +8,45 @@
 //------------------------------------------------------------------------------
 public static class GameComponentsLookup {
 
-    public const int AttackCooldown = 0;
-    public const int AttackRange = 1;
-    public const int AttackTimer = 2;
-    public const int CanShoot = 3;
-    public const int Damage = 4;
-    public const int DamageEvent = 5;
-    public const int Destroyed = 6;
-    public const int Destructible = 7;
-    public const int EnemyTag = 8;
-    public const int EnemyWave = 9;
-    public const int Health = 10;
-    public const int HitRadius = 11;
-    public const int InAttackRange = 12;
-    public const int LifeTime = 13;
-    public const int MeleeAttacker = 14;
-    public const int MoveDirection = 15;
-    public const int MoveSpeed = 16;
-    public const int Path = 17;
-    public const int Position = 18;
-    public const int PreviousPosition = 19;
-    public const int Projectile = 20;
-    public const int Radius = 21;
-    public const int RangedAttacker = 22;
-    public const int RewardedXP = 23;
-    public const int Shooter = 24;
-    public const int SpawnPoint = 25;
-    public const int Target = 26;
-    public const int ThroneTag = 27;
-    public const int TowerTag = 28;
-    public const int Velocity = 29;
-    public const int View = 30;
-    public const int Weapon = 31;
+    public const int AnimationState = 0;
+    public const int AttackCooldown = 1;
+    public const int AttackRange = 2;
+    public const int AttackTimer = 3;
+    public const int CanShoot = 4;
+    public const int Damage = 5;
+    public const int DamageEvent = 6;
+    public const int Destroyed = 7;
+    public const int Destructible = 8;
+    public const int EnemyTag = 9;
+    public const int EnemyWave = 10;
+    public const int Health = 11;
+    public const int HitRadius = 12;
+    public const int InAttackRange = 13;
+    public const int LifeTime = 14;
+    public const int LookDirection = 15;
+    public const int MeleeAttacker = 16;
+    public const int MoveDirection = 17;
+    public const int MoveSpeed = 18;
+    public const int Path = 19;
+    public const int Position = 20;
+    public const int PreviousPosition = 21;
+    public const int Projectile = 22;
+    public const int Radius = 23;
+    public const int RangedAttacker = 24;
+    public const int RewardedXP = 25;
+    public const int Shooter = 26;
+    public const int SpawnPoint = 27;
+    public const int Target = 28;
+    public const int ThroneTag = 29;
+    public const int TowerTag = 30;
+    public const int Velocity = 31;
+    public const int View = 32;
+    public const int Weapon = 33;
 
-    public const int TotalComponents = 32;
+    public const int TotalComponents = 34;
 
     public static readonly string[] componentNames = {
+        "AnimationState",
         "AttackCooldown",
         "AttackRange",
         "AttackTimer",
@@ -58,6 +61,7 @@ public static class GameComponentsLookup {
         "HitRadius",
         "InAttackRange",
         "LifeTime",
+        "LookDirection",
         "MeleeAttacker",
         "MoveDirection",
         "MoveSpeed",
@@ -79,6 +83,7 @@ public static class GameComponentsLookup {
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(AnimationStateComponent),
         typeof(AttackCooldownComponent),
         typeof(AttackRangeComponent),
         typeof(AttackTimerComponent),
@@ -93,6 +98,7 @@ public static class GameComponentsLookup {
         typeof(HitRadiusComponent),
         typeof(InAttackRangeComponent),
         typeof(LifeTimeComponent),
+        typeof(LookDirectionComponent),
         typeof(MeleeAttackerComponent),
         typeof(MoveDirectionComponent),
         typeof(MoveSpeedComponent),

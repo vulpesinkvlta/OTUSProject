@@ -32,7 +32,8 @@ public class GameplayFeatures : Feature
         Add(new EnemyDesiredDirectionSystem(contexts));
         Add(new EnemySeparationSystem(contexts));
         Add(new EnemyMovementSystem(contexts));
-
+        Add(new EnemyAnimationSystem(contexts));
+        Add(new EnemyRotationSystem(contexts));
         Add(new AttackSystem(contexts));
 
         Add(new ProjectileSpawnSystem(contexts, pool));
