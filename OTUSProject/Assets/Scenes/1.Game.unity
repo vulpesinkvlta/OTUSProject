@@ -2546,18 +2546,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1064888170}
   m_CullTransparentMesh: 1
---- !u!114 &1087410193 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6726079341402574990, guid: b0377921260a8874d9493b075ba4f0be,
-    type: 3}
-  m_PrefabInstance: {fileID: 5320198182957336296}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24b63a2ff03cb1441a4334b1eeaf4116, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1107779477
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3105,11 +3093,10 @@ MonoBehaviour:
   _towerConfig: {fileID: 11400000, guid: ff3802d3a859a4047b54040668d2f89c, type: 2}
   _throneConfig: {fileID: 11400000, guid: 1060d967bc8b60841a66b3046499111b, type: 2}
   _experienceView: {fileID: 928785269}
-  _towerButtonView: {fileID: 1087410193}
+  _towerButtonView: {fileID: 1553941494}
   _towerView: {fileID: -406248545124506911, guid: 154e2d640a2cd8847a36bb6e37512e1c,
     type: 3}
-  _enemyView: {fileID: -5586884526705418215, guid: 30f1eb460bfe42849b9e5e5aab598cb3,
-    type: 3}
+  _freeFlyCamera: {fileID: 1287321417}
 --- !u!114 &1313192884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3462,6 +3449,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1530436088}
   m_CullTransparentMesh: 1
+--- !u!114 &1553941494 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2873074733153437578, guid: b0377921260a8874d9493b075ba4f0be,
+    type: 3}
+  m_PrefabInstance: {fileID: 5320198182957336296}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5211a0f0ace74348a25ef1020628c35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1622576672
 GameObject:
   m_ObjectHideFlags: 0
@@ -4599,7 +4598,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: TowerPlaceButton
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6726079341402574990, guid: b0377921260a8874d9493b075ba4f0be, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
