@@ -10,7 +10,7 @@ namespace Code.Infrastructure.Installers
   {
     public override void InstallBindings()
     {
-      Container.BindInterfacesAndSelfTo<GoldService>().AsSingle();
+      //Container.BindInterfacesAndSelfTo<GoldService>().AsSingle();
       Container.Bind<ICardUIPresenter>().To<CardContainerPresenter>().AsSingle();
     }
   }

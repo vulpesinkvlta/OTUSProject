@@ -13,6 +13,7 @@ namespace Code.Infrastructure.StateMachine.States
         private readonly IGameStateMachine _stateMachine;
         private readonly ISceneLoaderService _sceneLoader;
         private readonly ILoadingCurtain _curtain;
+        private readonly ICountDownCurtain _countDownCurtain;
         private readonly GameLayerContext _gameContext;
         private readonly ISaveLoadService _saveLoad;
         private readonly IExperienceService _experienceService;
@@ -21,6 +22,7 @@ namespace Code.Infrastructure.StateMachine.States
         public LevelLoopState(IGameStateMachine stateMachine,
           ISceneLoaderService sceneLoader,
           ILoadingCurtain curtain,
+          ICountDownCurtain countDownCurtain,
           GameLayerContext gameContext,
           ISaveLoadService saveLoad,
           IExperienceService experienceService)
@@ -28,6 +30,7 @@ namespace Code.Infrastructure.StateMachine.States
             _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;
             _curtain = curtain;
+            _countDownCurtain = countDownCurtain;
             _gameContext = gameContext;
             _saveLoad = saveLoad;
             _experienceService = experienceService;
@@ -35,10 +38,11 @@ namespace Code.Infrastructure.StateMachine.States
 
         public void Enter()
         {
+            _countDownCurtain.Hide();
             _isLevelUpTransition = false;
             _experienceService.OnLevelChanged += OnLevelChanged;
-            Debug.Log("Enter Level Loop State");
             _gameContext.Initialize();
+            Debug.Log("Enter Level Loop State");
         }
 
         public void Exit()

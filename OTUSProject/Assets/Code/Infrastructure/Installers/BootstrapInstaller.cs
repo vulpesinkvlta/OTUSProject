@@ -22,35 +22,39 @@ namespace Code.Infrastructure.Installers
   {
     [SerializeField] private LoadingCurtain _curtainPrefab;
     [SerializeField] private LevelUpWindow _levelUpWindow;
+    [SerializeField] private CountdownCurtain _curtain;
+
 
         public override void InstallBindings()
-    {
-      BindInfrastructureServices();
-      BindContexts();
-      BindSaveLoadService();
-      BindGameFactories();
-      BindRegisterServices();
-      Container.Bind<IExperienceService>().To<ExperienceService>().AsSingle();
+        {
+          BindInfrastructureServices();
+          BindContexts();
+          BindSaveLoadService();
+          BindGameFactories();
+          BindRegisterServices();
+          Container.Bind<IExperienceService>().To<ExperienceService>().AsSingle();
 
-      Container.Bind<LevelUpWindow>().FromInstance(_levelUpWindow).AsSingle();
-        BindGameStateMachine();
-    }
+          Container.Bind<LevelUpWindow>().FromInstance(_levelUpWindow).AsSingle();
+            BindGameStateMachine();
+        }
 
         private void BindInfrastructureServices()
-    {
-      Container.Bind<IDIService>().To<DIService>().AsSingle();
-      Container.Bind<IInputService>().To<StandaloneInput>().AsSingle();
-      Container.Bind<IConfigDataService>().To<ConfigDataService>().AsSingle();
-      Container.Bind<ICoroutineRunner>().FromInstance(this).AsSingle();
-      Container.Bind<ISceneLoaderService>().To<SceneLoaderService>().AsSingle();
-      Container.BindInterfacesAndSelfTo<LoadingCurtain>()
-        .FromComponentInNewPrefab(_curtainPrefab).AsSingle();
-    }
+        {
+          Container.Bind<IDIService>().To<DIService>().AsSingle();
+          Container.Bind<IInputService>().To<StandaloneInput>().AsSingle();
+          Container.Bind<IConfigDataService>().To<ConfigDataService>().AsSingle();
+          Container.Bind<ICoroutineRunner>().FromInstance(this).AsSingle();
+          Container.Bind<ISceneLoaderService>().To<SceneLoaderService>().AsSingle();
+          Container.BindInterfacesAndSelfTo<LoadingCurtain>()
+            .FromComponentInNewPrefab(_curtainPrefab).AsSingle();
+          Container.BindInterfacesAndSelfTo<CountdownCurtain>().FromComponentInNewPrefab(_curtain).AsSingle();
 
-    private void BindRegisterServices()
-    {
-      Container.Bind<IRegisterService>().To<RegisterService>().AsSingle();
-    }
+        }
+
+        private void BindRegisterServices()
+        {
+          Container.Bind<IRegisterService>().To<RegisterService>().AsSingle();
+        }
 
     private void BindContexts()
     {

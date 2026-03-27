@@ -4380,6 +4380,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelUpWindow
       objectReference: {fileID: 0}
+    - target: {fileID: 694040775066390569, guid: 49f69f923918f5e429f987f306afa529,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4926795845454681458, guid: 49f69f923918f5e429f987f306afa529,
         type: 3}
       propertyPath: m_Pivot.x
