@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Zenject;
 using Entitas;
+using Code.Infrastructure._Common.Abstractions;
 
 public class GameBootstrap : MonoBehaviour
 {
@@ -22,16 +23,21 @@ public class GameBootstrap : MonoBehaviour
                         towerFactory, buildMode, grid, throneFactory, xpService, stats));
     }
 
-    void Start()
+    public void Start()
     {
         if (_systems == null)
             Debug.LogError("SYSTEMS NULL");
         _systems.Initialize();
     }
 
-    void Update()
+    public void Update()
     {
         _systems.Execute();
         _systems.Cleanup();
+    }
+
+    public void OnDisable()
+    {
+        _systems.TearDown();
     }
 }

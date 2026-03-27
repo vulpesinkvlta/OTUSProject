@@ -59,14 +59,14 @@ public class EnemyFactory
         entity.isCanShoot = true;
         entity.isDestructible = true;
 
-        var view = _container.InstantiatePrefabForComponent<EnemyView>(
+        var facade = _container.InstantiatePrefabForComponent<EnemyFacade>(
             enemyConfig.Prefab,
             position,
             Quaternion.identity,
             null);
 
-        view.Initialize(entity);
-        entity.AddView(view);
+        facade.Initialize(entity);
+        entity.AddView(facade.View);
 
         return entity;
     }

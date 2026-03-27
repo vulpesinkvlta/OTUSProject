@@ -4,7 +4,7 @@ using UnityEngine;
 public class ProjectileHitSystem : IExecuteSystem
 {
     private readonly IGroup<GameEntity> _projectiles;
-    private readonly IGroup<GameEntity> _enemies;
+    private readonly IGroup<GameEntity> _targets;
     private readonly GameContext _context;
 
     public ProjectileHitSystem(Contexts contexts)
@@ -18,32 +18,32 @@ public class ProjectileHitSystem : IExecuteSystem
                 GameMatcher.Damage)
             .NoneOf(GameMatcher.Destroyed));
 
-        _enemies = _context.GetGroup(
+        _targets = _context.GetGroup(
             GameMatcher.AllOf(
-                GameMatcher.EnemyTag,
                 GameMatcher.Position,
-                GameMatcher.Health));
+                GameMatcher.Health)
+        .NoneOf(GameMatcher.Projectile));
     }
 
     public void Execute()
     {
         var projectiles = _projectiles.GetEntities();
-        var enemies = _enemies.GetEntities();
+        var targets = _targets.GetEntities();
 
         foreach (var projectile in projectiles)
         {
-            foreach (var enemy in enemies)
+            foreach (var target in targets)
             {
                 float distance = Vector3.Distance(
                     projectile.position.value,
-                    enemy.position.value);
+                    target.position.value);
 
                 if (distance < 0.5f)
                 {
                     var damage = _context.CreateEntity();
 
                     damage.AddDamageEvent(
-                        enemy,
+                        target,
                         projectile.damage.value);
 
                     projectile.isDestroyed = true;
