@@ -42,8 +42,7 @@ public class ProjectileHitSystem : IExecuteSystem
                 {
                     var damage = _context.CreateEntity();
 
-                    damage.AddDamageEvent(
-                        target,
+                    damage.AddDamageEvent(target,
                         projectile.damage.value);
 
                     projectile.isDestroyed = true;

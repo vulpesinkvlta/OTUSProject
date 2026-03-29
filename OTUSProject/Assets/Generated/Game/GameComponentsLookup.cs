@@ -20,30 +20,31 @@ public static class GameComponentsLookup {
     public const int EnemyTag = 9;
     public const int EnemyWave = 10;
     public const int Health = 11;
-    public const int HitRadius = 12;
-    public const int InAttackRange = 13;
-    public const int LifeTime = 14;
-    public const int LookDirection = 15;
-    public const int MeleeAttacker = 16;
-    public const int MoveDirection = 17;
-    public const int MoveSpeed = 18;
-    public const int Path = 19;
-    public const int Position = 20;
-    public const int PreviousPosition = 21;
-    public const int Projectile = 22;
-    public const int Radius = 23;
-    public const int RangedAttacker = 24;
-    public const int RewardedXP = 25;
-    public const int Shooter = 26;
-    public const int SpawnPoint = 27;
-    public const int Target = 28;
-    public const int ThroneTag = 29;
-    public const int TowerTag = 30;
-    public const int Velocity = 31;
-    public const int View = 32;
-    public const int Weapon = 33;
+    public const int Hit = 12;
+    public const int HitRadius = 13;
+    public const int InAttackRange = 14;
+    public const int LifeTime = 15;
+    public const int LookDirection = 16;
+    public const int MeleeAttacker = 17;
+    public const int MoveDirection = 18;
+    public const int MoveSpeed = 19;
+    public const int Path = 20;
+    public const int Position = 21;
+    public const int PreviousPosition = 22;
+    public const int Projectile = 23;
+    public const int Radius = 24;
+    public const int RangedAttacker = 25;
+    public const int RewardedXP = 26;
+    public const int Shooter = 27;
+    public const int SpawnPoint = 28;
+    public const int Target = 29;
+    public const int ThroneTag = 30;
+    public const int TowerTag = 31;
+    public const int Velocity = 32;
+    public const int View = 33;
+    public const int Weapon = 34;
 
-    public const int TotalComponents = 34;
+    public const int TotalComponents = 35;
 
     public static readonly string[] componentNames = {
         "AnimationState",
@@ -58,6 +59,7 @@ public static class GameComponentsLookup {
         "EnemyTag",
         "EnemyWave",
         "Health",
+        "Hit",
         "HitRadius",
         "InAttackRange",
         "LifeTime",
@@ -95,6 +97,7 @@ public static class GameComponentsLookup {
         typeof(EnemyTagComponent),
         typeof(EnemyWaveComponent),
         typeof(HealthComponent),
+        typeof(HitComponent),
         typeof(HitRadiusComponent),
         typeof(InAttackRangeComponent),
         typeof(LifeTimeComponent),
